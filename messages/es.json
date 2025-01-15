@@ -1,4 +1,5 @@
 {
-    "title": "Escanea este QR desde tu app de Hologram",
-    "details": "Detalles"
+  "title": "Escanea este QR desde tu app de Hologram",
+  "details": "Detalles",
+  "somethingWentWrong": "¡Ups! Algo salió mal"
 }

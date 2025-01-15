@@ -2,8 +2,8 @@ const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL || "http://localhost:3000";
 
 export async function getQR() {
   try {
-    const url =
-      "https://p2800.ovpndev.2060.io/v1/invitation/presentation-request";
+    //const url = "https://p2800.ovpndev.2060.io/v1/invitation/presentation-request";
+    const url = "https://chatbot-demo.dev.2060.io/s?id=c1477ca7-7c7f-4eed-99b3-e001a92b1ab8 ";
     const requestBody = {
       callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
       ref: "1234-5678",
