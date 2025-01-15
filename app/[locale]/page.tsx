@@ -1,19 +1,18 @@
 "use client";
 
-import { getQR } from "./lib/actions";
-import { Metadata } from "next";
-import Error from "./error";
+import { getQR } from "../lib/actions";
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
-import { useSocket } from "./hook/useSocket";
+import { useSocket } from "../hook/useSocket";
 import Image from "next/image";
-import Header from "./header";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations();
   const { isConnected, eventMessage, emitEvent } = useSocket();
-  const [inputMessage, setInputMessage] = useState("");
   console.log("eventMessage", eventMessage);
+  const [inputMessage, setInputMessage] = useState("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputMessage.trim()) {
@@ -21,13 +20,13 @@ export default function Home() {
       setInputMessage("");
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     const makeGetRequest = async () => {
-      const response= await getQR()
-      console.log('response',response)
-    }
-    makeGetRequest()
-  },[])
+      const response = await getQR();
+      console.log("response", response);
+    };
+    makeGetRequest();
+  }, []);
   /*
   const qr = await getQR();
   const response = await qr.json();
@@ -40,7 +39,7 @@ export default function Home() {
       <div>
         <p className="md:mb-2 lg:mb-3 ">
           <span className="text-hologram-color text-2xl md:text-5xl lg:text-5xl font-semibold text-center">
-            Escanea este QR desde tu app de Hologram
+            {t("title")}
           </span>
         </p>
       </div>
@@ -50,7 +49,7 @@ export default function Home() {
         height={400}
         alt="QR demo presentation"
       />
-      <Link href={"./presentation"}>
+      <Link href={`/presentation`}>
         <p className="hidden md:block">ir a detalles</p>
       </Link>
       <form onSubmit={handleSubmit} className="flex">

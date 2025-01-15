@@ -22,7 +22,7 @@ export default function Header() {
         <div>
           <Link href="https://github.com/2060-io" target="_blank">
             <Image
-              src="images/logo-github.svg"
+              src="/images/logo-github.svg"
               alt="Logo-gitHub"
               width={36}
               height={36}
@@ -31,7 +31,7 @@ export default function Header() {
               priority={false}
             />
             <Image
-              src="images/logo-github-white.svg"
+              src="/images/logo-github-white.svg"
               alt="Logo-gitHub"
               width={36}
               height={36}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const data = [
   { key: "Nombre", value: "Daniel Fernando Rico Leon" },
@@ -48,10 +49,11 @@ function Card({
 }
 
 export default function Presentation() {
+  const t = useTranslations();
   return (
     <>
       <span className="text-hologram-color text-2xl md:text-5xl lg:text-5xl font-semibold">
-        Detalles
+        {t('details')}
       </span>
       <div className="container mx-auto px-4 flex justify-center">
         <div className="flex flex-wrap justify-center -mx-4">
