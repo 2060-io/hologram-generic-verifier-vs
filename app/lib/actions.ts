@@ -23,8 +23,7 @@ export async function getQR() {
       body: JSON.stringify(requestBody),
     });
     const result = await response.json();
-    return result;
-    return Response.json({ message: "Hello actions!" });
+    Response.json({ message: result });
   } catch (error) {
     console.error(error);
     return Response.json({ error }, { status: 500 });

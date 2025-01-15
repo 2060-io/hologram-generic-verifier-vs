@@ -3,15 +3,28 @@
 import { getQR } from "../lib/actions";
 import { useEffect, useState } from "react";
 import { useSocket } from "../hook/useSocket";
-import Image from "next/image";
+import { QRCodeSVG } from "qrcode.react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import Error from "./error";
+import Loading from "./loading";
+
+type RequestState = {
+  loading: boolean;
+  error: string | null;
+  data: string | null;
+};
 
 export default function Home() {
   const t = useTranslations();
   const { isConnected, eventMessage, emitEvent } = useSocket();
-  console.log("eventMessage", eventMessage);
+  console.log('eventMessage', eventMessage);
   const [inputMessage, setInputMessage] = useState("");
+  const [requestState, setRequestState] = useState<RequestState>({
+    loading: true,
+    error: null,
+    data: null,
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,20 +33,30 @@ export default function Home() {
       setInputMessage("");
     }
   };
+
   useEffect(() => {
     const makeGetRequest = async () => {
       const response = await getQR();
+      if (response?.ok) {
+        setRequestState({ loading: false, error: null, data: "data here" });
+      } else {
+        setRequestState({
+          loading: false,
+          error: 'error',
+          data: null,
+        });
+      }
       console.log("response", response);
     };
     makeGetRequest();
   }, []);
-  /*
-  const qr = await getQR();
-  const response = await qr.json();
-  if (response.error) {
+
+  if (requestState.loading) {
+    return <Loading />;
+  }
+  if (requestState.error) {
     return <Error />;
   }
-    */
   return (
     <>
       <div>
@@ -43,12 +66,17 @@ export default function Home() {
           </span>
         </p>
       </div>
-      <Image
-        src="https://a.chatbot-demo.dev.2060.io/v1/qr"
-        width={400}
-        height={400}
-        alt="QR demo presentation"
-      />
+      <div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
+        <QRCodeSVG
+          value={
+            "https://chatbot-demo.dev.2060.io/s?id=c1477ca7-7c7f-4eed-99b3-e001a92b1ab8"
+          }
+          size={256}
+          bgColor={"#ffffff"}
+          fgColor={"#000000"}
+          level={"H"}
+        />
+      </div>
       <Link href={`/presentation`}>
         <p className="hidden md:block">ir a detalles</p>
       </Link>

@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
 
-export default async function Loading() {
+export default function Loading() {
   return (
     <Image
       src="/images/ico-hologram.png"
