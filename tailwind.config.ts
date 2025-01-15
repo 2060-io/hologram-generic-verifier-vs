@@ -9,8 +9,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        "hologram-color": "#7678EC",
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      fontFamily: {
+        euclidCircularA: ["euclidCircularA", "sans-serif"],
       },
     },
   },

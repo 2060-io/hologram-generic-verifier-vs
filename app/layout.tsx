@@ -1,16 +1,10 @@
+import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../css/globals.css";
+import "../css/euclidCircularA.css";
+import Header from "./header";
+const inter = Inter({ subsets: ["latin"] });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="bg-white dark:bg-gray-900">
+      <body className={`font-euclidCircularA ` + inter.className}>
+        <div className="mt-5 bg-white dark:bg-gray-900 text-black dark:text-gray-300">
+          <Header />
+          <main className="flex flex-col gap-8 row-start-2 items-center sm:items-center justify-center">
+            {children}
+          </main>
+          <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
+        </div>
       </body>
     </html>
   );
