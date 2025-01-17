@@ -2,6 +2,10 @@ const PUBLIC_BASE_URL =
   process.env.PUBLIC_BASE_URL ||
   "https://f442285821a31af458af8b09d237e087.serveo.net";
 
+const CREDENTIAL_DEFINITION_ID =
+  process.env.CREDENTIAL_DEFINITION_ID ||
+  "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT";
+
 type Response = {
   message?: Record<string, string>;
   ok: boolean;
@@ -16,11 +20,7 @@ export async function getQR(socketConnectionId: string): Promise<Response> {
       callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
       ref: socketConnectionId,
       requestedCredentials: [
-        {
-          credentialDefinitionId:
-            "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT",
-          attributes: ["phoneNumber"],
-        },
+        { credentialDefinitionId: CREDENTIAL_DEFINITION_ID },
       ],
     };
     const response = await fetch(url, {

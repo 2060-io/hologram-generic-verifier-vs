@@ -2,5 +2,6 @@
   "title": "Escanea este QR desde tu app de Hologram",
   "details": "Detalles",
   "somethingWentWrong": "¡Ups! Algo salió mal",
-  "claims": "Atributos"
+  "claims": "Atributos",
+  "requestRefused": "Solicitud rechazada"
 }

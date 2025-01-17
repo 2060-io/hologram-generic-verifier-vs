@@ -18,36 +18,36 @@ type RequestState = {
 export default function Home() {
   const t = useTranslations();
   const { presentationEventMessage, socketConnectionId } = useSocket();
-  const [requestState, setRequestState] = useState<RequestState>({
+  const [requestQRState, setRequestQRState] = useState<RequestState>({
     loading: true,
     error: null,
     data: null,
   });
 
   useEffect(() => {
-    const makeGetRequest = async () => {
+    const makeGetQRRequest = async () => {
       const response = await getQR(socketConnectionId!);
       if (response.ok && response.message) {
-        setRequestState({
+        setRequestQRState({
           loading: false,
           error: null,
           data: response.message,
         });
       } else {
-        setRequestState({
+        setRequestQRState({
           loading: false,
           error: "error",
           data: null,
         });
       }
     };
-    if (socketConnectionId) makeGetRequest();
+    if (socketConnectionId) makeGetQRRequest();
   }, [socketConnectionId]);
 
-  if (requestState.loading) {
+  if (requestQRState.loading) {
     return <Loading />;
   }
-  if (requestState.error) {
+  if (requestQRState.error) {
     return <Error />;
   }
   if (presentationEventMessage) {
@@ -64,7 +64,7 @@ export default function Home() {
       </div>
       <div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
         <QRCodeSVG
-          value={requestState?.data?.shortUrl ?? ""}
+          value={requestQRState?.data?.shortUrl ?? ""}
           size={256}
           bgColor={"#ffffff"}
           fgColor={"#000000"}

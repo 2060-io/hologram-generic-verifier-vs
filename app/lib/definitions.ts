@@ -16,9 +16,6 @@ export type OriginalPresentationEventMessage = {
   proofExchangeId: string;
 };
 
-export type PresentationEventMessage = {
-  ref: string;
+export type PresentationEventMessage = OriginalPresentationEventMessage & {
   claims?: Claim[];
-  status: 'refused' | 'ok';
-  proofExchangeId: string;
 };
