@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
@@ -13,14 +14,18 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   });
 
-  const io = new Server(server);
+  const io = new Server(server, { cors: { origin: "*" } });
 
   io.on("connection", (socket) => {
-    console.log("A client connected");
+    console.log("A client connected info is:", socket.id);
 
-    socket.on("demo event", (msg) => {
-      console.log("Message received:", msg);
-      io.emit("demo event", msg); // Broadcast the message to all connected clients
+    socket.on("presentationEvent", (data) => {
+      console.log("socket presentationEvent:", data);
+      io.to(data.ref).emit("presentationEventMessage", data);
+    });
+
+    socket.on("error", (error) => {
+      console.log("A server error has occurred", error);
     });
 
     socket.on("disconnect", () => {
@@ -30,6 +35,6 @@ app.prepare().then(() => {
 
   server.listen(3000, (err) => {
     if (err) throw err;
-    console.log("> Ready on http://localhost:3000");
+    console.log(`> Ready on ${process.env.PUBLIC_BASE_URL}`);
   });
 });

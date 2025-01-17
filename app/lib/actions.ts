@@ -1,12 +1,20 @@
-const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL || "http://localhost:3000";
+const PUBLIC_BASE_URL =
+  process.env.PUBLIC_BASE_URL ||
+  "https://f442285821a31af458af8b09d237e087.serveo.net";
 
-export async function getQR() {
+type Response = {
+  message?: Record<string, string>;
+  ok: boolean;
+  error?: string;
+};
+
+export async function getQR(socketConnectionId: string): Promise<Response> {
   try {
-    //const url = "https://p2800.ovpndev.2060.io/v1/invitation/presentation-request";
-    const url = "https://chatbot-demo.dev.2060.io/s?id=c1477ca7-7c7f-4eed-99b3-e001a92b1ab8 ";
+    const url =
+      "https://a.chatbot-demo.dev.2060.io/v1/invitation/presentation-request";
     const requestBody = {
       callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
-      ref: "1234-5678",
+      ref: socketConnectionId,
       requestedCredentials: [
         {
           credentialDefinitionId:
@@ -23,9 +31,9 @@ export async function getQR() {
       body: JSON.stringify(requestBody),
     });
     const result = await response.json();
-    Response.json({ message: result });
+    return { message: result, ok: true };
   } catch (error) {
     console.error(error);
-    return Response.json({ error }, { status: 500 });
+    return { error: `${error}`, ok: false };
   }
 }
