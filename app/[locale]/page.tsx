@@ -1,6 +1,7 @@
 "use client";
 
 import { getQR } from "@/app/lib/actions";
+import { RequestState } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import { useSocket } from "@/app//hook/useSocket";
 import { QRCodeSVG } from "qrcode.react";
@@ -8,12 +9,6 @@ import { useTranslations } from "next-intl";
 import Error from "./error";
 import Loading from "./loading";
 import Presentation from "./presentation";
-
-type RequestState = {
-  loading: boolean;
-  error: string | null;
-  data: Record<string, string> | null;
-};
 
 export default function Home() {
   const t = useTranslations();

@@ -1,3 +1,15 @@
+export type RequestState = {
+  loading: boolean;
+  error: string | null;
+  data: Record<string, string> | null;
+};
+
+export type Response = {
+  message?: Record<string, string>;
+  ok: boolean;
+  error?: string;
+};
+
 export type OriginalClaim = {
   name: string;
   value: string;
