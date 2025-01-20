@@ -34,7 +34,7 @@ export const useSocket = () => {
           const { ref, status, proofExchangeId } = msg;
           setPresentationEventMessage({ ref, status, proofExchangeId });
         }
-      }
+      },
     );
 
     setSocket(socketIo);

@@ -28,6 +28,9 @@ export type OriginalPresentationEventMessage = {
   proofExchangeId: string;
 };
 
-export type PresentationEventMessage = Omit<OriginalPresentationEventMessage, 'claims'> & {
+export type PresentationEventMessage = Omit<
+  OriginalPresentationEventMessage,
+  "claims"
+> & {
   claims?: Claim[];
 };
