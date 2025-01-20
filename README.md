@@ -43,11 +43,6 @@ This app was build using NextJS framework and a web socket server with socket.io
 
 3. Make sure you have a Issue credential emitted by ChatBot Service. If do not, request it an Issue credential to this service and accept it
 
-<video width="300" controls>
-  <source src="public/videos/ChatBotCredential.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
 4. Scan QR code of this web app in your Hologram app and present the credential that mobile app ask you. After present it you should see page screen as the next image
 
 ![Present credential image](public/images/presented.png)
