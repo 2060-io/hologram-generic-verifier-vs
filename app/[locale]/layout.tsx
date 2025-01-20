@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import type { Metadata } from "next";
 import "../../css/globals.css";
 import "../../css/euclidCircularA.css";
 import Header from "./header";
@@ -8,11 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-
-export const metadata: Metadata = {
-  title: "Hologram Demo Presentation",
-  description: "Hologram Demo Presentation",
-};
+import { metadata } from '@/app/lib/metadata'
 
 export default async function RootLayout({
   children,
@@ -27,11 +22,16 @@ export default async function RootLayout({
     notFound();
   }
 
+  const { title, description } = metadata[locale as "en" | "es"].home;
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
     <html lang={locale} className="bg-white dark:bg-gray-900">
+      <head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </head>
       <body className={`font-euclidCircularA ` + inter.className}>
         <NextIntlClientProvider messages={messages}>
           <div className="mt-5 bg-white dark:bg-gray-900 text-black dark:text-gray-300">
