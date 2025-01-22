@@ -1,13 +1,19 @@
-export type RequestState = {
-  loading: boolean;
-  error: string | null;
-  data: Record<string, string> | null;
+export type QRRequestResponse = {
+  proofExchangeId: string;
+  shortUrl: string;
+  url: string;
 };
 
-export type Response = {
-  message?: Record<string, string>;
+export type UIResponse = {
+  shortUrl?: string;
   ok: boolean;
   error?: string;
+};
+
+export type QRRequestState = {
+  loading: boolean;
+  error?: string;
+  shortUrl?: string;
 };
 
 export type OriginalClaim = {

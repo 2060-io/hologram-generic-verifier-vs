@@ -1,23 +1,10 @@
-import { Response } from "@/app/lib/definitions";
+import { QRRequestResponse, UIResponse } from "@/app/lib/definitions";
 
-const PUBLIC_BASE_URL =
-  process.env.PUBLIC_BASE_URL ||
-  "https://f442285821a31af458af8b09d237e087.serveo.net";
-
-const CREDENTIAL_DEFINITION_ID =
-  process.env.CREDENTIAL_DEFINITION_ID ||
-  "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT";
-
-export async function getQR(socketConnectionId: string): Promise<Response> {
+export async function getQR(socketConnectionId: string): Promise<UIResponse> {
   try {
-    const url =
-      "https://a.chatbot-demo.dev.2060.io/v1/invitation/presentation-request";
+    const url = "http://localhost:3000/api/generateqr";
     const requestBody = {
-      callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
-      ref: socketConnectionId,
-      requestedCredentials: [
-        { credentialDefinitionId: CREDENTIAL_DEFINITION_ID },
-      ],
+      socketConnectionId,
     };
     const response = await fetch(url, {
       headers: {
@@ -26,8 +13,8 @@ export async function getQR(socketConnectionId: string): Promise<Response> {
       method: "POST",
       body: JSON.stringify(requestBody),
     });
-    const result = await response.json();
-    return { message: result, ok: true };
+    const result = (await response.json()) as QRRequestResponse;
+    return { shortUrl: result.shortUrl, ok: true };
   } catch (error) {
     console.error(error);
     return { error: `${error}`, ok: false };

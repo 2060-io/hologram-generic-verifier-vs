@@ -1,7 +1,7 @@
 "use client";
 
 import { getQR } from "@/app/lib/actions";
-import { RequestState } from "@/app/lib/definitions";
+import { QRRequestState } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import { useSocket } from "@/app//hook/useSocket";
 import { QRCodeSVG } from "qrcode.react";
@@ -13,26 +13,22 @@ import Presentation from "./presentation";
 export default function Home() {
   const t = useTranslations();
   const { presentationEventMessage, socketConnectionId } = useSocket();
-  const [requestQRState, setRequestQRState] = useState<RequestState>({
+  const [requestQRState, setRequestQRState] = useState<QRRequestState>({
     loading: true,
-    error: null,
-    data: null,
   });
 
   useEffect(() => {
     const makeGetQRRequest = async () => {
       const response = await getQR(socketConnectionId!);
-      if (response.ok && response.message) {
+      if (response.ok && response.shortUrl) {
         setRequestQRState({
           loading: false,
-          error: null,
-          data: response.message,
+          shortUrl: response.shortUrl,
         });
       } else {
         setRequestQRState({
           loading: false,
-          error: "error",
-          data: null,
+          error: response.error ?? "An error occurred",
         });
       }
     };
@@ -59,7 +55,7 @@ export default function Home() {
       </div>
       <div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
         <QRCodeSVG
-          value={requestQRState?.data?.shortUrl ?? ""}
+          value={requestQRState?.shortUrl ?? ""}
           size={256}
           bgColor={"#ffffff"}
           fgColor={"#000000"}
