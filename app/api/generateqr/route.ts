@@ -1,18 +1,14 @@
 import { NextResponse } from "next/server";
-
-const PUBLIC_BASE_URL =
-  process.env.PUBLIC_BASE_URL ||
-  "https://f442285821a31af458af8b09d237e087.serveo.net";
-
-const CREDENTIAL_DEFINITION_ID =
-  process.env.CREDENTIAL_DEFINITION_ID ||
-  "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT";
+import {
+  SERVICE_AGENT_ADMIN_BASE_URL,
+  PUBLIC_BASE_URL,
+  CREDENTIAL_DEFINITION_ID,
+} from "@/app/lib/constants";
 
 export async function POST(req: Request) {
   const { socketConnectionId } = await req.json();
   try {
-    const url =
-      "https://a.chatbot-demo.dev.2060.io/v1/invitation/presentation-request";
+    const url = `${SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
     const requestBody = {
       callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
       ref: socketConnectionId,

@@ -4,6 +4,10 @@ const { parse } = require("url");
 const next = require("next");
 const { Server } = require("socket.io");
 
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+const PUBLIC_BASE_URL =
+  process.env.PUBLIC_BASE_URL ?? `http://localhost:${PORT}`;
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -33,8 +37,8 @@ app.prepare().then(() => {
     });
   });
 
-  server.listen(3000, (err) => {
+  server.listen(PORT, (err) => {
     if (err) throw err;
-    console.log(`> Ready on ${process.env.PUBLIC_BASE_URL}`);
+    console.log(`> Ready on ${PUBLIC_BASE_URL}`);
   });
 });

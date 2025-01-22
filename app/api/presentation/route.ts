@@ -1,8 +1,7 @@
 import { io } from "socket.io-client";
+import { PUBLIC_BASE_URL } from "@/app/lib/constants";
 
-const SERVER_URL = process.env.PUBLIC_BASE_URL || "http://localhost:3000";
-
-const socketIo = io(SERVER_URL, { transports: ["polling"] });
+const socketIo = io(PUBLIC_BASE_URL, { transports: ["polling"] });
 
 export async function POST(req: Request) {
   try {
