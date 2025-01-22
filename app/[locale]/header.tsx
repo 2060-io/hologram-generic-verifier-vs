@@ -1,8 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Header() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDarkMode(matchMedia.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches);
+    };
+
+    matchMedia.addEventListener("change", handleChange);
+
+    return () => {
+      matchMedia.removeEventListener("change", handleChange);
+    };
+  }, []);
+
   return (
     <header className="container mx-auto 2xl:px-28 xl:px-28 lg:px-28 px-6">
       <div className="flex justify-between mb-4">
@@ -22,20 +41,14 @@ export default function Header() {
         <div>
           <Link href="https://github.com/2060-io" target="_blank">
             <Image
-              src="/images/logo-github.svg"
+              src={
+                isDarkMode
+                  ? "/images/logo-github-white.svg"
+                  : "/images/logo-github.svg"
+              }
               alt="Logo-gitHub"
               width={36}
               height={36}
-              id="logo-github-light"
-              className="w-[36] h-[36] transition duration-300 ease-in-out hover:scale-110"
-              priority={false}
-            />
-            <Image
-              src="/images/logo-github-white.svg"
-              alt="Logo-gitHub"
-              width={36}
-              height={36}
-              id="logo-github-black"
               className="w-[36] h-[36] transition duration-300 ease-in-out hover:scale-110"
               priority={false}
             />
