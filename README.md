@@ -1,6 +1,8 @@
 This is a [Hologram](https://hologram.zone/) web app where you can make a presentation request credential demo using Hologram Mobile App
 
-## Getting Started for DEV
+## Getting Started
+
+## Run in developer mode
 
 First, run the development server:
 
@@ -14,6 +16,18 @@ Run project
 
 ```bash
 yarn dev
+```
+
+## Run in production mode
+
+```bash
+yarn install
+```
+
+Run project
+
+```bash
+yarn build && yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
