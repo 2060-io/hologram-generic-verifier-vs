@@ -12,19 +12,11 @@ yarn install
 
 ## Run in developer mode
 
-Run project
-
 ```bash
 yarn dev
 ```
 
 ## Run in production mode
-
-```bash
-yarn install
-```
-
-Run project
 
 ```bash
 yarn build && yarn start
@@ -51,10 +43,8 @@ This app was built using [Next.js framework](https://nextjs.org) and [Socket.IO]
 
 1. First of all you need to have Hologram mobile app installed in your device.
 
-2. Once your app is installed please make sure you have a ChatBot Service connection. If you do not have it you can read this QR code by opening this [ChatBotServiceQRCode](https://a.chatbot-demo.dev.2060.io/v1/qr) in your browser and scan it using Hologram mobile app
+2. Make sure you have a credential emitted by ChatBot Service. Otherwise, you wont be able to present any credential. If you do not have it, request it to chat bot service and accept it
 
-3. Make sure you have a Issue credential emitted by ChatBot Service. If do not, request it an Issue credential to this service and accept it
-
-4. Scan QR code of this web app in your Hologram app and present the credential that mobile app ask you. After present it you should see page screen as the next image
+3. Scan QR code of this web app in your Hologram app and present the credential that mobile app ask you. After present it you should see page screen as the next image
 
 ![Present credential image](public/images/presented.png)
