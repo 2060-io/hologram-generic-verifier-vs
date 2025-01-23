@@ -2,15 +2,15 @@ This is a [Hologram](https://hologram.zone/) web app where you can make a presen
 
 ## Getting Started
 
-## Run in developer mode
-
-First, run the development server:
+## First of all
 
 Install dependencies
 
 ```bash
 yarn install
 ```
+
+## Run in developer mode
 
 Run project
 
