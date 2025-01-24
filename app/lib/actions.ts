@@ -1,8 +1,9 @@
 import { QRRequestResponse, UIResponse } from "@/app/lib/definitions";
+import { PUBLIC_BASE_URL } from "./constants";
 
 export async function getQR(socketConnectionId: string): Promise<UIResponse> {
   try {
-    const url = "http://localhost:3000/api/generateqr";
+    const url = `${PUBLIC_BASE_URL}/api/generateqr`;
     const requestBody = {
       socketConnectionId,
     };

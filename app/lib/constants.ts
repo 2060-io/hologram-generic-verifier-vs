@@ -1,7 +1,10 @@
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+export const PORT = process.env.NEXT_PUBLIC_PORT
+  ? Number(process.env.NEXT_PUBLIC_PORT)
+  : 3000;
 
-const PUBLIC_BASE_URL =
-  process.env.PUBLIC_BASE_URL ?? `http://localhost:${PORT}`;
+const PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_BASE_URL}:${PORT}`
+  : `http://localhost:${PORT}`;
 
 const CREDENTIAL_DEFINITION_ID =
   process.env.CREDENTIAL_DEFINITION_ID ||

@@ -4,9 +4,13 @@ const { parse } = require("url");
 const next = require("next");
 const { Server } = require("socket.io");
 
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
-const PUBLIC_BASE_URL =
-  process.env.PUBLIC_BASE_URL ?? `http://localhost:${PORT}`;
+const PORT = process.env.NEXT_PUBLIC_PORT
+  ? Number(process.env.NEXT_PUBLIC_PORT)
+  : 3000;
+
+const PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_BASE_URL}:${PORT}`
+  : `http://localhost:${PORT}`;
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
