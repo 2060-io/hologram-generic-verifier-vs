@@ -22,8 +22,6 @@ yarn dev
 yarn build && yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## Configuration
 
 At the moment, all configuration is done by environment variables. All of them are optional for development
