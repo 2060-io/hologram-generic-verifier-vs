@@ -1,11 +1,19 @@
 import { QRRequestResponse, UIResponse } from "@/app/lib/definitions";
-import { PUBLIC_BASE_URL } from "./constants";
+import {
+  SERVICE_AGENT_ADMIN_BASE_URL,
+  PUBLIC_BASE_URL,
+  CREDENTIAL_DEFINITION_ID,
+} from "./constants";
 
 export async function getQR(socketConnectionId: string): Promise<UIResponse> {
   try {
-    const url = `${PUBLIC_BASE_URL}/api/generateqr`;
+    const url = `${SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
     const requestBody = {
-      socketConnectionId,
+      callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
+      ref: socketConnectionId,
+      requestedCredentials: [
+        { credentialDefinitionId: CREDENTIAL_DEFINITION_ID },
+      ],
     };
     const response = await fetch(url, {
       headers: {
