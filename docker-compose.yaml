@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  verifier-app:
+    ports:
+      - 2804:3000
+    build: .
+    command: yarn start
+    environment:
+      - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
+    networks:
+      - verifier
+
+networks:
+  verifier:
+    driver: bridge

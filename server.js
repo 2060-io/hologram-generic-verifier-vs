@@ -38,7 +38,7 @@ app.prepare().then(() => {
     : 3000;
 
   const PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-    ? `${process.env.NEXT_PUBLIC_BASE_URL}:${PORT}`
+    ? `${process.env.NEXT_PUBLIC_BASE_URL}`
     : `http://localhost:${PORT}`;
 
   server.listen(PORT, (err) => {
