@@ -1,8 +1,5 @@
 "use client";
 
-import { getQR } from "@/app/lib/actions";
-import { QRRequestState } from "@/app/lib/definitions";
-import { useEffect, useState } from "react";
 import { useSocket } from "@/app//hook/useSocket";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
@@ -12,34 +9,13 @@ import Presentation from "./presentation";
 
 export default function Home() {
   const t = useTranslations();
-  const { presentationEventMessage, socketConnectionId } = useSocket();
-  const [requestQRState, setRequestQRState] = useState<QRRequestState>({
-    loading: true,
-  });
-
-  useEffect(() => {
-    const makeGetQRRequest = async () => {
-      const response = await getQR(socketConnectionId!);
-      if (response.ok && response.shortUrl) {
-        setRequestQRState({
-          loading: false,
-          shortUrl: response.shortUrl,
-        });
-      } else {
-        setRequestQRState({
-          loading: false,
-          error: response.error ?? "An error occurred",
-        });
-      }
-    };
-    if (socketConnectionId) makeGetQRRequest();
-  }, [socketConnectionId]);
+  const { presentationEventMessage, requestQRState } = useSocket();
 
   if (requestQRState.loading) {
     return <Loading />;
   }
   if (requestQRState.error) {
-    return <Error />;
+    return <Error error={requestQRState.error} />;
   }
   if (presentationEventMessage) {
     return <Presentation presentationEventMessage={presentationEventMessage} />;
