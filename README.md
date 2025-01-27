@@ -22,18 +22,17 @@ yarn dev
 yarn build && yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## Configuration
 
 At the moment, all configuration is done by environment variables. All of them are optional for development
 but likely needed for production and test deployments.
 
-| Variable                     | Description                           | Default value                                                                                                        |
-| ---------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| PUBLIC_BASE_URL              | Public URL where app is deployed      | http://localhost:3000                                                                                                |
-| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types | did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT |
-| SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                | https://a.chatbot-demo.dev.2060.io                                                                                   |
+| Variable                     | Description                                   | Default value                                                                                                        |
+| ---------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| NEXT_PUBLIC_BASE_URL         | Public URL without port where app is deployed | http://localhost:${NEXT_PUBLIC_PORT}                                                                                 |
+| NEXT_PUBLIC_PORT             | Port where app is listening                   | 3000                                                                                                                 |
+| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types         | did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT |
+| SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                        | https://a.chatbot-demo.dev.2060.io                                                                                   |
 
 ## About this web app
 
