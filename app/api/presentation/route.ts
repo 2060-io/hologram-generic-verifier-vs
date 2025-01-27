@@ -9,7 +9,7 @@ export async function POST(req: Request) {
       socketIo.connect();
     }
     socketIo.emit("presentationEvent", data);
-    return new Response(JSON.stringify({ message: "Hello World" }));
+    return new Response(JSON.stringify({ message: data }));
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });
   }
