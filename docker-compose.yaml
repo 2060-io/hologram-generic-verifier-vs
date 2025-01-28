@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  verifier-app:
+    ports:
+      - 2804:3000
+    build: .
+    command: yarn start
+    environment:
+      - NEXT_PUBLIC_PORT=3000
+      - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
+      - SERVICE_AGENT_ADMIN_BASE_URL=https://a.chatbot-demo.dev.2060.io
+    networks:
+      - verifier
+
+networks:
+  verifier:
+    driver: bridge
