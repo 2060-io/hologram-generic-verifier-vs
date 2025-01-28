@@ -1,9 +1,9 @@
-FROM node:20-alpine as deps
+FROM node:22-alpine as deps
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-FROM node:20-alpine as builder
+FROM node:22-alpine as builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -14,7 +14,7 @@ ENV NEXT_PUBLIC_BASE_URL=APP_NEXT_PUBLIC_BASE_URL
 
 RUN yarn build
 
-FROM node:20-alpine as runner
+FROM node:22-alpine as runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/next.config.ts ./
