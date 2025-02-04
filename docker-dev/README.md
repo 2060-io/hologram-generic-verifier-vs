@@ -37,7 +37,7 @@ region: us
 Then, start ngrok service:
 
 ```
-$ ngrok start
+$ ngrok start --all --config ngrok-config.yml
 ngrok                                                                                                              (Ctrl+C to quit)
 
 Build better APIs with ngrok. Early access: ngrok.com/early-access

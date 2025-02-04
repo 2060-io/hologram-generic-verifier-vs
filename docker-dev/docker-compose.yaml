@@ -6,7 +6,9 @@ services:
     # By default, it points to the chatbot demo, making these dependencies optional.
     ports:
       - 2904:3000
-    build: .
+    build: 
+      context: ../
+      dockerfile: Dockerfile
     command: yarn start
     environment:
       - NEXT_PUBLIC_PORT=3000
