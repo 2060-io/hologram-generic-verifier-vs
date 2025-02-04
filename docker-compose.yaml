@@ -10,6 +10,9 @@ services:
       - NEXT_PUBLIC_PORT=3000
       - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
       - SERVICE_AGENT_ADMIN_BASE_URL=https://p2800.ovpndev.2060.io
+    depends_on:
+      - service-agent
+      - unic-id-dts
     networks:
       - verifier
 
@@ -25,6 +28,7 @@ services:
       - AGENT_INVITATION_IMAGE_URL=https://p2802.ovpndev.2060.io/avatar.png
       - AGENT_LABEL=Unic Id dts
       - ANONCREDS_SERVICE_BASE_URL=https://p2801.ovpndev.2060.io
+      - PUBLIC_API_BASE_URL=https://p2801.ovpndev.2060.io
       - USE_CORS=true
       - EVENTS_BASE_URL=https://p2802.ovpndev.2060.io
       - POSTGRES_HOST=postgres
