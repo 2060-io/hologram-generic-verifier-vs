@@ -4,10 +4,6 @@ const { parse } = require("url");
 const next = require("next");
 const { Server } = require("socket.io");
 
-const SERVICE_AGENT_ADMIN_BASE_URL =
-  process.env.SERVICE_AGENT_ADMIN_BASE_URL ||
-  "https://a.chatbot-demo.dev.2060.io";
-
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -33,22 +29,15 @@ app.prepare().then(() => {
     let message = {};
     socket.on("generateQR", async (data) => {
       try {
-        // Get credential types
-        const credResponse = await fetch(`${SERVICE_AGENT_ADMIN_BASE_URL}/v1/credential-types`, {
-          method: 'GET',
-          headers: { accept: 'application/json', 'Content-Type': 'application/json' },
-        })
-        const credentialTypes = await credResponse.json();
-        if (credentialTypes.length === 0) {
-          console.log('No credential types have been found')
-        }
-        const credentialDefinitionId = credentialTypes[0].id
-        const url = `${SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
+        const url = `${process.env.SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
         const requestBody = {
           callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
           ref: data.socketConnectionId,
           requestedCredentials: [
-            { credentialDefinitionId },
+            { 
+              credentialDefinitionId: process.env.CREDENTIAL_DEFINITION_ID ?? 
+              "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT"
+            },
           ],
         };
         const response = await fetch(url, {
