@@ -3,15 +3,15 @@ version: "3"
 services:
   verifier-app:
     ports:
-      - 2804:3000
+      - 2904:3000
     build: 
       context: ../
       dockerfile: Dockerfile
     command: yarn start
     environment:
       - NEXT_PUBLIC_PORT=3000
-      - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
-      - SERVICE_AGENT_ADMIN_BASE_URL=https://p2800.ovpndev.2060.io
+      - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904
+      - SERVICE_AGENT_ADMIN_BASE_URL=http://192.168.149.127:3000
       - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/9rJib8YFi1JdxhdUmjMKEiYj49CNdMa9cEn42z4nouYS
     networks:
       - verifier
@@ -20,14 +20,14 @@ services:
     image: io2060/2060-service-agent:dev
     restart: always
     ports:
-      - 2800:3000
-      - 2801:3001
+      - 3000:3000
+      - 3001:3001
     environment:
-      - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io
-      - PUBLIC_API_BASE_URL=https://p2801.ovpndev.2060.io
-      - AGENT_ENDPOINT=wss://p2801.ovpndev.2060.io
+      # - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io # Enable this line for with public URL
+      - PUBLIC_API_BASE_URL=http://192.168.149.127:3001
+      - AGENT_ENDPOINT=ws://192.168.149.127:3001 # For deployments, use wss and the assigned public URL
       - USE_CORS=true
-      - EVENTS_BASE_URL=https://d.chatbot-demo.dev.2060.io
+      - EVENTS_BASE_URL=http://192.168.149.127:2904
     volumes:
       - ./afj:/root/.afj
     networks:

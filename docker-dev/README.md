@@ -12,46 +12,6 @@ In this example, we will use the ngrok service. The free version of ngrok is eno
 
 First, follow installation instructions on ngrok web site. Then edit your ngrok config file, add your authtoken and configure the tunnel section with the following:
 
-```
-authtoken: <your ngrok token>
-tunnels:
-    serviceagent:
-        addr: 3001
-        proto: http
-        schemes:
-            - https
-    backend:
-        addr: 2902
-        proto: http
-        schemes:
-            - https
-    verifier:
-        addr: 2904
-        proto: http
-        schemes:
-            - https
-version: "2"
-region: us
-```
-
-Then, start ngrok service:
-
-```
-$ ngrok start --all --config ngrok-config.yml
-ngrok                                                                                                              (Ctrl+C to quit)
-
-Build better APIs with ngrok. Early access: ngrok.com/early-access
-
-Session Status                online
-Account                       (Plan: Free)
-Version                       3.5.0
-Region                        United States (us)
-Latency                       92ms
-Web Interface                 http://127.0.0.1:4040
-Forwarding                    https://04e8-190-24-98-158.ngrok-free.app -> http://localhost:2902
-Forwarding                    https://11ee-190-24-98-158.ngrok-free.app -> http://localhost:2904
-Forwarding                    https://59cd-190-24-98-158.ngrok-free.app -> http://localhost:3001
-```
 
 ## Prepare docker-compose and start the containers
 
@@ -62,80 +22,37 @@ version: "3"
 
 services:
   verifier-app:
-    # The verifier-app can function in standalone mode without 'depends_on' or 'SERVICE_AGENT_ADMIN_BASE_URL'.
-    # By default, it points to the chatbot demo, making these dependencies optional.
     ports:
-      - 2804:3000
-    build: .
+      - 2904:3000
+    build: 
+      context: ../
+      dockerfile: Dockerfile
     command: yarn start
     environment:
       - NEXT_PUBLIC_PORT=3000
-      - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
-      # This environment variable is needed only when the verifier-app is used in conjunction with a service (not chatbot demo) and its service agent.
-      # Otherwise, it defaults to the chatbot demo.
-      - SERVICE_AGENT_ADMIN_BASE_URL=https://p2800.ovpndev.2060.io
-    # 'depends_on' is only necessary when integrating with UnicId and its service agent for validation.
-    # It is not required for standalone mode
-    depends_on:
-      - service-agent
-      - unic-id-dts
+      - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904
+      - SERVICE_AGENT_ADMIN_BASE_URL=http://192.168.149.127:3000
+      - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/9rJib8YFi1JdxhdUmjMKEiYj49CNdMa9cEn42z4nouYS
     networks:
       - verifier
 
-  # From this point onward, ensure that Ngrok is enabled for proper functionality and replace the URLs as specified in the documentation.
   service-agent:
     image: io2060/2060-service-agent:dev
     restart: always
     ports:
-      - 2800:3000
-      - 2801:3001
+      - 3000:3000
+      - 3001:3001
     environment:
-      - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io
-      - AGENT_ENDPOINT=wss://p2801.ovpndev.2060.io
-      - AGENT_INVITATION_IMAGE_URL=https://p2802.ovpndev.2060.io/avatar.png
-      - AGENT_LABEL=Unic Id dts
-      - ANONCREDS_SERVICE_BASE_URL=https://p2801.ovpndev.2060.io
-      - PUBLIC_API_BASE_URL=https://p2801.ovpndev.2060.io
+      # - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io # Enable this line for with public URL
+      - PUBLIC_API_BASE_URL=http://192.168.149.127:3001
+      - AGENT_ENDPOINT=ws://192.168.149.127:3001 # For deployments, use wss and the assigned public URL
       - USE_CORS=true
-      - EVENTS_BASE_URL=https://p2802.ovpndev.2060.io
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USER=verifier
-      - POSTGRES_PASSWORD=2060demo
+      - EVENTS_BASE_URL=http://192.168.149.127:2904
     volumes:
       - ./afj:/root/.afj
     networks:
       - verifier
 
-  unic-id-dts:
-    image: io2060/unic.id-issuer-dts:dev
-    container_name: unic-id-dts
-    restart: always
-    ports:
-      - 2802:5000
-    environment:
-      - AGENT_PORT=5000
-      - SERVICE_AGENT_ADMIN_URL=https://p2800.ovpndev.2060.io
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USER=verifier
-      - POSTGRES_PASSWORD=2060demo
-      - VISION_URL=https://vision.dev.2060.io
-      - WEBRTC_SERVER_URL=https://dts-webrtc.dev.2060.io
-      - PUBLIC_BASE_URL=https://p2802.ovpndev.2060.io
-      - ID_VERIFICATION_TIMEOUT_SECONDS=900
-      - LOG_LEVEL=3
-    networks:
-      - verifier
-
-  postgres:
-    image: postgres:15.2
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_PASSWORD=2060demo
-      - POSTGRES_USER=verifier
-    networks:
-      - verifier
 
 networks:
   verifier:
