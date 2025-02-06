@@ -9,6 +9,12 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
+  if (!process.env.SERVICE_AGENT_ADMIN_BASE_URL || !process.env.CREDENTIAL_DEFINITION_ID) {
+    throw new Error(
+      "Missing environment variables: SERVICE_AGENT_ADMIN_BASE_URL or CREDENTIAL_DEFINITION_ID"
+    );
+  }
+  
   const PORT = process.env.NEXT_PUBLIC_PORT
     ? Number(process.env.NEXT_PUBLIC_PORT)
     : 3000;
