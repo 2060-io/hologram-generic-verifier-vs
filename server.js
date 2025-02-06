@@ -4,19 +4,17 @@ const { parse } = require("url");
 const next = require("next");
 const { Server } = require("socket.io");
 
-const SERVICE_AGENT_ADMIN_BASE_URL =
-  process.env.SERVICE_AGENT_ADMIN_BASE_URL ||
-  "https://a.chatbot-demo.dev.2060.io";
-
-const CREDENTIAL_DEFINITION_ID =
-  process.env.CREDENTIAL_DEFINITION_ID ||
-  "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT";
-
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
+  if (!process.env.SERVICE_AGENT_ADMIN_BASE_URL || !process.env.CREDENTIAL_DEFINITION_ID) {
+    throw new Error(
+      "Missing environment variables: SERVICE_AGENT_ADMIN_BASE_URL or CREDENTIAL_DEFINITION_ID"
+    );
+  }
+  
   const PORT = process.env.NEXT_PUBLIC_PORT
     ? Number(process.env.NEXT_PUBLIC_PORT)
     : 3000;
@@ -37,12 +35,14 @@ app.prepare().then(() => {
     let message = {};
     socket.on("generateQR", async (data) => {
       try {
-        const url = `${SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
+        const url = `${process.env.SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
         const requestBody = {
           callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
           ref: data.socketConnectionId,
           requestedCredentials: [
-            { credentialDefinitionId: CREDENTIAL_DEFINITION_ID },
+            { 
+              credentialDefinitionId: process.env.CREDENTIAL_DEFINITION_ID
+            },
           ],
         };
         const response = await fetch(url, {
