@@ -31,6 +31,7 @@ but likely needed for production and test deployments.
 | ---------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | NEXT_PUBLIC_BASE_URL         | Public URL without port where app is deployed | http://localhost:${NEXT_PUBLIC_PORT}                                                                                 |
 | NEXT_PUBLIC_PORT             | Port where app is listening                   | 3000                                                                                                                 |
+| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types         | did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT |
 | SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                        | https://a.chatbot-demo.dev.2060.io                                                                                   |
 
 ## About this web app
