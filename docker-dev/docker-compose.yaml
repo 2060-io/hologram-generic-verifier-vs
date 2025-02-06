@@ -3,16 +3,16 @@ version: "3"
 services:
   verifier-app:
     ports:
-      - 2904:3000
+      - 2804:3000
     build: 
       context: ../
       dockerfile: Dockerfile
     command: yarn start
     environment:
       - NEXT_PUBLIC_PORT=3000
-      - NEXT_PUBLIC_BASE_URL=https://p2904.testing.2060.io
-      - SERVICE_AGENT_ADMIN_BASE_URL=https://3000.testing.2060.io
-      - CREDENTIAL_DEFINITION_ID=did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT
+      - NEXT_PUBLIC_BASE_URL=https://p2804.ovpndev.2060.io
+      - SERVICE_AGENT_ADMIN_BASE_URL=https://p2800.ovpndev.2060.io
+      - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/9rJib8YFi1JdxhdUmjMKEiYj49CNdMa9cEn42z4nouYS
     networks:
       - verifier
 
@@ -20,13 +20,14 @@ services:
     image: io2060/2060-service-agent:dev
     restart: always
     ports:
-      - 3000:3000
-      - 3001:3001
+      - 2800:3000
+      - 2801:3001
     environment:
-      - AGENT_PUBLIC_DID=did:web:p3001.testing.2060.io
-      - PUBLIC_API_BASE_URL=https://p3001.testing.2060.io
+      - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io
+      - PUBLIC_API_BASE_URL=https://p2801.ovpndev.2060.io
+      - AGENT_ENDPOINT=wss://p2801.ovpndev.2060.io
       - USE_CORS=true
-      - EVENTS_BASE_URL=https://p2902.testing.2060.io
+      - EVENTS_BASE_URL=https://d.chatbot-demo.dev.2060.io
     volumes:
       - ./afj:/root/.afj
     networks:

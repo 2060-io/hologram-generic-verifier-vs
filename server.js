@@ -35,8 +35,7 @@ app.prepare().then(() => {
           ref: data.socketConnectionId,
           requestedCredentials: [
             { 
-              credentialDefinitionId: process.env.CREDENTIAL_DEFINITION_ID ?? 
-              "did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT"
+              credentialDefinitionId: process.env.CREDENTIAL_DEFINITION_ID
             },
           ],
         };
