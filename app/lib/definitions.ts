@@ -30,7 +30,7 @@ export type Claim = {
 export type OriginalPresentationEventMessage = {
   ref: string;
   claims?: OriginalClaim[];
-  status: "refused" | "ok";
+  status: "refused" | "ok" | "waiting";
   proofExchangeId: string;
 };
 

@@ -3,5 +3,6 @@
   "details": "Detalles",
   "somethingWentWrong": "¡Ups! Algo salió mal",
   "claims": "Atributos",
-  "requestRefused": "Solicitud rechazada"
+  "requestRefused": "Solicitud rechazada",
+  "requestWaiting": "Esperando Respuesta"
 }

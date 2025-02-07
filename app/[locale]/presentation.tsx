@@ -17,6 +17,14 @@ export default function Presentation({ presentationEventMessage }: Props) {
       </p>
     );
   }
+  if (status === "waiting") {
+    return (
+      <p className="text-hologram-color p-4 rounded-md shadow-md flex items-center space-x-2">
+        <span>{t("requestWaiting")}</span>
+        <span>😊</span>
+      </p>
+    );
+  }
   if (claims) {
     return (
       <div className="w-full md:w-3/6 flex flex-col items-center rounded-xl bg-gray-50 p-4">
