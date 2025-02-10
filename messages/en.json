@@ -4,5 +4,5 @@
   "somethingWentWrong": "¡Ups! Something went wrong",
   "claims": "Claims",
   "requestRefused": "Request Refused",
-  "requestWaiting": "Waiting Response"
+  "requestConnected": "Connected"
 }

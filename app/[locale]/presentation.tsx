@@ -17,10 +17,10 @@ export default function Presentation({ presentationEventMessage }: Props) {
       </p>
     );
   }
-  if (status === "waiting") {
+  if (status === "connected") {
     return (
       <p className="text-hologram-color p-4 rounded-md shadow-md flex items-center space-x-2">
-        <span>{t("requestWaiting")}</span>
+        <span>{t("requestConnected")}</span>
         <span>😊</span>
       </p>
     );
