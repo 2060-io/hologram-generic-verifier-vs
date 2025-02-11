@@ -3,6 +3,7 @@
   "details": "Details",
   "somethingWentWrong": "¡Ups! Something went wrong",
   "claims": "Claims",
-  "requestRefused": "Request Refused",
-  "requestConnected": "Connection established. Please wait"
+  "requestRefused": "Request Refused!",
+  "requestConnected": "Connection established. Please wait",
+  "noCompatibleCredentials": "User does not have compatible credentials in his wallet"
 }

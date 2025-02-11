@@ -30,7 +30,7 @@ export type Claim = {
 export type OriginalPresentationEventMessage = {
   ref: string;
   claims?: OriginalClaim[];
-  status: "refused" | "ok" | "connected";
+  status: "refused" | "ok" | "connected" | "no-compatible-credentials";
   proofExchangeId: string;
 };
 

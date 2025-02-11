@@ -9,13 +9,7 @@ type Props = {
 export default function Presentation({ presentationEventMessage }: Props) {
   const t = useTranslations();
   const { claims, status } = presentationEventMessage;
-  if (status === "refused") {
-    return (
-      <p className="font-bold text-xl">
-        <span>{t("requestRefused")}</span>
-      </p>
-    );
-  }
+
   if (status === "connected") {
     return (
       <div>
@@ -26,6 +20,20 @@ export default function Presentation({ presentationEventMessage }: Props) {
           <span>{t("requestConnected")}</span>
         </p>
       </div>
+    );
+  }
+  if (status === "no-compatible-credentials") {
+    return (
+      <p className="font-bold text-xl">
+        <span>{t("noCompatibleCredentials")}</span>
+      </p>
+    );
+  }
+  if (status === "refused") {
+    return (
+      <p className="font-bold text-xl">
+        <span>{t("requestRefused")}</span>
+      </p>
     );
   }
   if (claims) {
