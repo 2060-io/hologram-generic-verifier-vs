@@ -3,5 +3,6 @@
   "details": "Details",
   "somethingWentWrong": "¡Ups! Something went wrong",
   "claims": "Claims",
-  "requestRefused": "Request Refused"
+  "requestRefused": "Request Refused",
+  "requestConnected": "Connection established. Please wait"
 }

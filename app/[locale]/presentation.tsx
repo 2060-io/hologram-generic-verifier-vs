@@ -11,10 +11,21 @@ export default function Presentation({ presentationEventMessage }: Props) {
   const { claims, status } = presentationEventMessage;
   if (status === "refused") {
     return (
-      <p className="text-red-600 font-bold text-xl bg-red-100 p-4 rounded-md shadow-md flex items-center space-x-2">
+      <p className="font-bold text-xl">
         <span>{t("requestRefused")}</span>
-        <span>😢</span>
       </p>
+    );
+  }
+  if (status === "connected") {
+    return (
+      <div>
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-12 h-12 border-4 border-t-hologram-color border-r-transparent border-b-hologram-color border-l-transparent rounded-full animate-spin" />
+        </div>
+        <p className="font-bold text-xl">
+          <span>{t("requestConnected")}</span>
+        </p>
+      </div>
     );
   }
   if (claims) {
