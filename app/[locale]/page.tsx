@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <div>
         <p className="md:mb-2 lg:mb-3 ">
-          <span className="text-hologram-color text-2xl md:text-5xl lg:text-5xl font-semibold text-center">
+          <span className="text-hologram-color text-xl md:text-xl lg:text-2xl font-semibold text-center">
             {t("title")}
           </span>
         </p>
