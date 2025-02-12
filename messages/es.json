@@ -3,6 +3,9 @@
   "details": "Detalles",
   "somethingWentWrong": "¡Ups! Algo salió mal",
   "claims": "Atributos",
-  "requestRefused": "Solicitud rechazada",
-  "requestConnected": "Conexión establecida. Por favor espera"
+  "requestRefused": "Solicitud rechazada!",
+  "requestConnected": "Conexión establecida. Por favor espera",
+  "noCompatibleCredentials": "El usuario no tiene credenciales compatibles en su billetera",
+  "verificationError": "Error de verificación de la credencial",
+  "unspecifiedError": "Ups! Algo salió mal"
 }

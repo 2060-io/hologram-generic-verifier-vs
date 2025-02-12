@@ -36,7 +36,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <div className="mt-5 bg-white dark:bg-gray-900 text-black dark:text-gray-300">
             <Header />
-            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-center justify-center">
+            <main className="flex flex-col row-start-2 items-center sm:items-center justify-center">
               {children}
             </main>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
