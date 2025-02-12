@@ -16,12 +16,14 @@ export default function Presentation({ presentationEventMessage }: Props) {
     useMemo(() => {
       return {
         ok: claims ? (
-          <div className="w-full md:w-3/6 flex flex-col items-center rounded-xl bg-gray-50 dark:bg-black p-4">
-            <span className="font-bold text-xl">{t("claims")}</span>
-            <div className="container mx-auto px-4 flex justify-center">
-              <PresentationClaims claims={claims} />
+          <>
+            <span className="font-bold text-xl mb-4">{t("claims")}</span>
+            <div className="w-full md:w-3/6 flex flex-col items-center rounded-xl bg-gray-50 dark:bg-black p-4">
+              <div className="container mx-auto px-4 flex justify-center">
+                <PresentationClaims claims={claims} />
+              </div>
             </div>
-          </div>
+          </>
         ) : (
           <></>
         ),
