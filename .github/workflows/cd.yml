@@ -25,15 +25,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract
-
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:${{ steps.extract.outputs.branch }}
+          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
