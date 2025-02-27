@@ -32,6 +32,7 @@ const convertToPng = async (jp2ImageBase64: string) => {
       body: JSON.stringify({ jp2ImageBase64 }),
     });
     const data = await res.json();
+    if (!res.ok) throw new Error(data.error ?? "Unknown error from server");
     return data.pngImageBase64 as string;
   } catch (error) {
     console.error("Error converting jp2 image: ", error);
