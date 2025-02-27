@@ -1,7 +1,7 @@
 {
   "title": "Scan this QR from your Hologram app",
   "details": "Details",
-  "somethingWentWrong": "¡Oops! Something went wrong",
+  "somethingWentWrong": "Oops! Something went wrong",
   "claims": "Claims",
   "requestRefused": "Request Refused!",
   "requestConnected": "Connection established. Please wait",
