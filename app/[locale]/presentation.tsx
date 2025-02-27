@@ -45,26 +45,28 @@ export default function Presentation({ presentationEventMessage }: Props) {
         ),
         "no-compatible-credentials": (
           <>
-            <p className="font-bold text-xl text-orange-500">
+            <p className="font-bold text-xl text-black">
               <span>{t("noCompatibleCredentials")}</span>
             </p>
-            { issuerInvitationUrl && (
-            <><div>
+            {issuerInvitationUrl && (
+              <>
                 <p className="md:mb-2 lg:mb-3 ">
                   <span className="text-hologram-color text-xl md:text-xl lg:text-2xl font-semibold text-center">
                     {t("scanToConnectToIssuer")}
                   </span>
                 </p>
-              </div><div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
+                <div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
                   <QRCodeSVG
                     value={issuerInvitationUrl}
                     size={256}
                     bgColor={"#ffffff"}
                     fgColor={"#000000"}
-                    level={"H"} />
-                </div></>)}
+                    level={"H"}
+                  />
+                </div>
+              </>
+            )}
           </>
-        
         ),
         "verification-error": (
           <p className="font-bold text-xl text-red-500">
@@ -77,7 +79,7 @@ export default function Presentation({ presentationEventMessage }: Props) {
           </p>
         ),
       };
-    }, [claims, t]);
+    }, [claims, t, issuerInvitationUrl]);
 
   return render[status];
 }
