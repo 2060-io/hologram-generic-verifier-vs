@@ -24,12 +24,12 @@ const getDataUrlMimeType = (dataUrl: string) => {
   return match ? match[1] : null;
 };
 
-const convertToPNG = async (base64JP2: string) => {
+const convertToPng = async (jp2ImageBase64: string) => {
   try {
     const res = await fetch(`./api/convert`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ base64JP2 }),
+      body: JSON.stringify({ jp2ImageBase64 }),
     });
     const data = await res.json();
     return data.pngImageBase64 as string;
@@ -52,7 +52,7 @@ export const transformClaimsData = async (claims: OriginalClaim[]) => {
       const mimeType = getDataUrlMimeType(value);
       if (mimeType === "image/jp2") {
         const jp2Base64 = value.split(",")[1];
-        const convertedImage = await convertToPNG(jp2Base64);
+        const convertedImage = await convertToPng(jp2Base64);
         finalImageValue = `data:image/png;base64,${convertedImage}`;
       }
       stringRows.push({
