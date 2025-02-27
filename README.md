@@ -4,6 +4,8 @@ This is a [Hologram](https://hologram.zone/) web app where you can make a presen
 
 ## First of all
 
+This project uses a command-line tools that can be used to modify and manipulate images called [imagemagick](https://imagemagick.org/script/command-line-tools.php) in some cases a conversion from jp2 format to png will be necessary to display images in browsers. So, its recommended to install this command-line tools globally in your system. For that, follow its official [installation guide](https://imagemagick.org/script/download.php)
+
 Install dependencies
 
 ```bash
@@ -26,15 +28,16 @@ yarn build && yarn start
 
 At the moment, all configuration is done by environment variables. While most of them are optional for development, this two (`CREDENTIAL_DEFINITION_ID` and `SERVICE_AGENT_ADMIN_BASE_URL`) are mandatory for production and test deployments.
 
-| Variable                     | Description                                   | Default value                                                                                                        |
-| ---------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| NEXT_PUBLIC_BASE_URL         | Public URL without port where app is deployed | http://localhost:3000                                                                                 |
-| NEXT_PUBLIC_PORT             | Port where app is listening                   | 3000                                                                                                                 |
-| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types         | `none`                                                                                                               |
-| SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                        | `none`                                                                                                               |
-| ISSUER_DID | Optional public DID to let users connect to get their credentials in case they don't have any compatible credential                       | `none`                                                                                                               |
-| ISSUER_LABEL | A label to show in the invitation to credential issuer                       | Issuer                                                  |
-| ISSUER_IMAGE_URL | An URL pointing to an image to show in the invitation to credential issuer                       | `none`                                                                                                               |
+| Variable                     | Description                                                                                                         | Default value         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| NEXT_PUBLIC_BASE_URL         | Public URL without port where app is deployed                                                                       | http://localhost:3000 |
+| NEXT_PUBLIC_PORT             | Port where app is listening                                                                                         | 3000                  |
+| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types                                                                               | `none`                |
+| SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                                                                                              | `none`                |
+| ISSUER_DID                   | Optional public DID to let users connect to get their credentials in case they don't have any compatible credential | `none`                |
+| ISSUER_LABEL                 | A label to show in the invitation to credential issuer                                                              | Issuer                |
+| ISSUER_IMAGE_URL             | An URL pointing to an image to show in the invitation to credential issuer                                          | `none`                |
+
 |
 
 **Note:** By default, it is recommended to use the following values for `CREDENTIAL_DEFINITION_ID` and `SERVICE_AGENT_ADMIN_BASE_URL`:
