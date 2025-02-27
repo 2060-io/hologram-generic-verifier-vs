@@ -64,7 +64,9 @@ export default function Presentation({ presentationEventMessage }: Props) {
                     level={"H"}
                   />
                 </div>
-                <button onClick={() => window.location.reload()}>Restart</button>
+                <button onClick={() => window.location.reload()}>
+                  {t("refresh")}
+                </button>
               </>
             )}
           </>
