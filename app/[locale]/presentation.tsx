@@ -64,7 +64,9 @@ export default function Presentation({ presentationEventMessage }: Props) {
                     level={"H"}
                   />
                 </div>
-                <button onClick={() => window.location.reload()}>Restart</button>
+                <button onClick={() => window.location.reload()}>
+                  {t("restart")}
+                </button>
               </>
             )}
           </>
@@ -76,7 +78,7 @@ export default function Presentation({ presentationEventMessage }: Props) {
         ),
         "unspecified-error": (
           <p className="font-bold text-xl text-red-500">
-            <span>{t("unspecifiedError")}</span>
+            <span>{t("somethingWentWrong")}</span>
           </p>
         ),
       };

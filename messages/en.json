@@ -1,12 +1,12 @@
 {
   "title": "Scan this QR from your Hologram app",
   "details": "Details",
-  "somethingWentWrong": "¡Ups! Something went wrong",
+  "somethingWentWrong": "Oops! Something went wrong",
   "claims": "Claims",
   "requestRefused": "Request Refused!",
   "requestConnected": "Connection established. Please wait",
   "noCompatibleCredentials": "User does not have compatible credentials in his wallet",
   "scanToConnectToIssuer": "Scan this QR from your Hologram app to connect to the issuer",
   "verificationError": "Credential Verification Error",
-  "unspecifiedError": "Ups! Something went wrong"
+  "restart": "Restart"
 }

@@ -8,5 +8,5 @@
   "noCompatibleCredentials": "El usuario no tiene credenciales compatibles en su billetera",
   "scanToConnectToIssuer": "Escanea este QR desde tu app de Hologram para conectar con el emisor",
   "verificationError": "Error de verificación de la credencial",
-  "unspecifiedError": "Ups! Algo salió mal"
+  "restart": "Reiniciar"
 }
