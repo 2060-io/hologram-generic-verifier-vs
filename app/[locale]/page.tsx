@@ -31,7 +31,7 @@ export default function Home() {
       </div>
       <div className="w-[300px] h-[300px] flex justify-center items-center mb-6 bg-white border-solid border-2 rounded-2xl border-gray-300">
         <QRCodeSVG
-          value={requestQRState?.shortUrl ?? ""}
+          value={requestQRState.invitationUrl ?? ""}
           size={256}
           bgColor={"#ffffff"}
           fgColor={"#000000"}

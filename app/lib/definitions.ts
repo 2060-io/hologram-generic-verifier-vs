@@ -5,7 +5,7 @@ export type QRRequestResponse = {
 };
 
 export type UIResponse = {
-  shortUrl?: string;
+  invitationUrl?: string;
   ok: boolean;
   error?: string;
 };
@@ -13,7 +13,7 @@ export type UIResponse = {
 export type QRRequestState = {
   loading: boolean;
   error?: string;
-  shortUrl?: string;
+  invitationUrl?: string;
 };
 
 export type OriginalClaim = {

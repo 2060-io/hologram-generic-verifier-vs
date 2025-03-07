@@ -30,10 +30,10 @@ export const useSocket = () => {
 
     socketIo.on("generateQREventMessage", (msg) => {
       console.log("generateQREventMessage", msg);
-      if (msg.ok && msg.shortUrl) {
+      if (msg.ok && msg.invitationUrl) {
         setRequestQRState({
           loading: false,
-          shortUrl: msg.shortUrl,
+          invitationUrl: msg.invitationUrl,
         });
       } else {
         setRequestQRState({
