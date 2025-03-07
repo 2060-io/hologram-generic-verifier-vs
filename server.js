@@ -71,9 +71,10 @@ app.prepare().then(() => {
           body: JSON.stringify(requestBody),
         });
         const result = await response.json();
+        if (!result.shortUrl) throw Error('Result from Service Agent does not contain any short URL')
         message = {
           ok: true,
-          shortUrl: result?.shortUrl,
+          invitationUrl: `https://hologram.zone/?_url=${Buffer.from(result.shortUrl).toString('base64url')}`,
         };
       } catch (error) {
         console.error(error);
