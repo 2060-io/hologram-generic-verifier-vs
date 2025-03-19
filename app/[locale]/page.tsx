@@ -1,8 +1,8 @@
 "use client";
-
 import { useSocket } from "@/app//hook/useSocket";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import Error from "./error";
 import Loading from "./loading";
 import Presentation from "./presentation";
@@ -10,6 +10,12 @@ import Presentation from "./presentation";
 export default function Home() {
   const t = useTranslations();
   const { presentationEventMessage, requestQRState } = useSocket();
+  
+  useEffect(() => {
+    if (requestQRState.invitationUrl && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location.href = requestQRState.invitationUrl;
+    }
+  }, [requestQRState.invitationUrl]);
 
   if (requestQRState.loading) {
     return <Loading />;
