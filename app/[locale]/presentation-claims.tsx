@@ -28,7 +28,7 @@ export default function PresentationClaims({ claims }: { claims: Claim[] }) {
                     height={20}
                   />
                 ) : (
-                  <span className="flex-1 break-all  font-light text-base">
+                  <span className="flex-1 break-all font-light text-base line-clamp-2 hover:line-clamp-none">
                     {item.value}
                   </span>
                 )}
