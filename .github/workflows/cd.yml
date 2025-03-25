@@ -51,13 +51,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:dev
-
-      - name: Build and push
-        if: ${{ steps.release-please.outputs.releases_created == 'true' }}
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+          tags: |
+            ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:dev,
+            ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:${{ steps.release-please.outputs.tag_name }}
+      
