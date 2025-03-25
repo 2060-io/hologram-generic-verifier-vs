@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.2](https://github.com/2060-io/unic.id-generic-verifier-dts/compare/generic-verifier@v0.0.1...generic-verifier@v0.0.2) (2025-03-25)
+## 0.0.1 (2025-03-25)
 
 
 ### Features
