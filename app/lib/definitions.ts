@@ -34,6 +34,7 @@ export type OriginalPresentationEventMessage = {
     | "refused"
     | "ok"
     | "connected"
+    | "scanned"
     | "no-compatible-credentials"
     | "verification-error"
     | "unspecified-error";

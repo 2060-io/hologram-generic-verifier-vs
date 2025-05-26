@@ -29,6 +29,16 @@ export default function Presentation({ presentationEventMessage }: Props) {
             <span>{t("requestRefused")}</span>
           </p>
         ),
+        scanned: (
+          <div>
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 border-4 border-t-green-500 border-r-transparent border-b-green-500 border-l-transparent rounded-full animate-spin" />
+            </div>
+            <p className="font-bold text-xl text-green-500">
+              <span>{t("requestScanned")}</span>
+            </p>
+          </div>
+        ),
         connected: (
           <div>
             <div className="flex items-center justify-center mb-4">
