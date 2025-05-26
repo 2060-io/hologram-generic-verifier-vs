@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/2060-io/generic-verifier/compare/v0.0.2...v0.0.3) (2025-05-26)
+
+
+### Bug Fixes
+
+* add support for scanned state ([#37](https://github.com/2060-io/generic-verifier/issues/37)) ([3281b98](https://github.com/2060-io/generic-verifier/commit/3281b98f346bd926f5bca84961178b0e5e5c352f))
+
 ## [0.0.2](https://github.com/2060-io/unic.id-generic-verifier-dts/compare/v0.0.1...v0.0.2) (2025-03-25)
 
 
