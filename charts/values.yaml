@@ -1,0 +1,17 @@
+name: generic-verifier
+namespace: default
+containerPort: 2904
+domain: example.com
+replicas: 1
+ingress:
+  enableCors: "true"
+service:
+  agent: "https://agent.example.com"
+  credentialTypes: "credential-type-id"
+  issuerDid: "did:example:issuer"
+  issuerLabel: "Example Issuer"
+  issuerImageUrl: "https://example.com/image.png"
+images:
+  verifier:
+    repository: "io2060/generic-verifier"
+    tag: "v0.0.3"
