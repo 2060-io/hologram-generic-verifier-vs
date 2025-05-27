@@ -60,7 +60,7 @@ jobs:
 
       - name: Log in to Docker Hub Helm Registry
         run: |
-          echo "$DH_TOKEN" | helm registry login -u "$DH_USERNAME" --password-stdin docker.io
+          echo "${{ secrets.DOCKER_HUB_PWD }}" | helm registry login -u "${{ secrets.DOCKER_HUB_LOGIN }}" --password-stdin docker.io
 
       - name: Push Helm chart to Docker Hub OCI repo
         env:
