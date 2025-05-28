@@ -6,5 +6,5 @@ version: 0.0.1
 appVersion: "1.0"
 dependencies:
   - name: vs-agent
-    version: 143-67976d907e7fe30b6ad6986288e4fccc3ee2e954
+    version: 145-c50214540ce03ed73069e2f6193459c841038f56
     repository: oci://registry-1.docker.io/io2060

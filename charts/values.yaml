@@ -1,18 +1,10 @@
 name: generic-verifier
-namespace: default
+namespace: example
 containerPort: 2904
 domain: example.com
-vsAgentName: vs-agent
-vsAgentNamespace: default
-vsAgentReplicas: 1
-vsAgentDomain: example.com
 replicas: 1
-adminPort: 3000
-agentPort: 3001
 ingress:
   enableCors: "true"
-  privacy:
-    whitelist: "0.0.0.0/0"
 service:
   agent: "https://agent.example.com"
   credentialTypes: "credential-type-id"
@@ -23,34 +15,53 @@ images:
   verifier:
     repository: "io2060/generic-verifier"
     tag: "v0.0.3"
-  agent:
-    repository: io2060/2060-service-agent
-    tag: v1.2.0
-  invitationUrl: "https://example.com/invitation.png"
 
-postgresql:
-  enabled: false
-  auth:
-    username: myuser
-    password: mypassword
-    database: mydatabase
-  primary:
+vs-agent:
+  vsAgentName: generic-verifier
+  vsAgentNamespace: example
+  vsAgentReplicas: 1
+  vsAgentDomain: example.com
+  adminPort: 3000
+  agentPort: 3001
+  ingress:
+    privacy:
+      whitelist: "0.0.0.0/0"
+  images:
+    agent:
+      repository: io2060/2060-service-agent
+      tag: v1.2.0
+    invitationUrl: "https://example.com/invitation.png"
+  postgresql:
+    enabled: false
+    auth:
+      username: myuser
+      password: mypassword
+      database: mydatabase
+    primary:
+      persistence:
+        enabled: true
+        storageClass: csi-cinder-classic
+        size: 1Gi
+  redis:
+    enabled: false
+    architecture: standalone
+
+    auth:
+      password: myRedisPass123
+
     persistence:
       enabled: true
       storageClass: csi-cinder-classic
       size: 1Gi
-redis:
-  enabled: false
-  architecture: standalone
 
-  auth:
-    password: myRedisPass123
 
-  persistence:
-    enabled: true
-    storageClass: csi-cinder-classic
+  # Extra environment variables (extensible)
+  extraEnv:
+    - name: PUBLIC_API_BASE_URL
+      value: https://a.verifier.test.dev.2060.io
+
+
+  # Persistent volume configuration for app
+  storage:
     size: 1Gi
-extraEnv: []
-storage:
-  size: 1Gi
-  storageClassName: csi-cinder-high-speed
+    storageClassName: csi-cinder-high-speed
