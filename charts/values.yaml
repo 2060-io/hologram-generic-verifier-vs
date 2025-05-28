@@ -3,8 +3,12 @@ namespace: default
 containerPort: 2904
 domain: example.com
 replicas: 1
+adminPort: 3000
+agentPort: 3001
 ingress:
   enableCors: "true"
+  privacy:
+    whitelist: "0.0.0.0/0"
 service:
   agent: "https://agent.example.com"
   credentialTypes: "credential-type-id"
@@ -15,45 +19,34 @@ images:
   verifier:
     repository: "io2060/generic-verifier"
     tag: "v0.0.3"
+  agent:
+    repository: io2060/2060-service-agent
+    tag: v1.2.0
+  invitationUrl: "https://example.com/invitation.png"
 
-vs-agent:
-  name: vs-agent
-  namespace: default
-  replicas: 1
-  domain: example.com
-  ingress:
-    privacy:
-      whitelist: "0.0.0.0/0"
-  images:
-    agent:
-      repository: io2060/2060-service-agent
-      tag: v1.2.0
-    invitationUrl: "https://example.com/invitation.png"
-  adminPort: 3000
-  agentPort: 3001
-  postgresql:
-    enabled: false
-    auth:
-      username: myuser
-      password: mypassword
-      database: mydatabase
-    primary:
-      persistence:
-        enabled: true
-        storageClass: csi-cinder-classic
-        size: 1Gi
-  redis:
-    enabled: false
-    architecture: standalone
-
-    auth:
-      password: myRedisPass123
-
+postgresql:
+  enabled: false
+  auth:
+    username: myuser
+    password: mypassword
+    database: mydatabase
+  primary:
     persistence:
       enabled: true
       storageClass: csi-cinder-classic
       size: 1Gi
-  extraEnv: []
-  storage:
+redis:
+  enabled: false
+  architecture: standalone
+
+  auth:
+    password: myRedisPass123
+
+  persistence:
+    enabled: true
+    storageClass: csi-cinder-classic
     size: 1Gi
-    storageClassName: csi-cinder-high-speed
+extraEnv: []
+storage:
+  size: 1Gi
+  storageClassName: csi-cinder-high-speed
