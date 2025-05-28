@@ -2,6 +2,10 @@ name: generic-verifier
 namespace: default
 containerPort: 2904
 domain: example.com
+vsAgentName: vs-agent
+vsAgentNamespace: default
+vsAgentReplicas: 1
+vsAgentDomain: example.com
 replicas: 1
 adminPort: 3000
 agentPort: 3001
