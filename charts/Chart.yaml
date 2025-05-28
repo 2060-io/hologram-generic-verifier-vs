@@ -4,3 +4,7 @@ description: A Helm chart for deploying the Generic Verifier application
 type: application
 version: 0.0.1
 appVersion: "1.0"
+dependencies:
+  - name: vs-agent
+    version: 140-382e06809e17f50e094f3049fb85ef46253e5abe
+    repository: oci://registry-1.docker.io/io2060/vs-agent

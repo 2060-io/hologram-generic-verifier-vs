@@ -15,3 +15,45 @@ images:
   verifier:
     repository: "io2060/generic-verifier"
     tag: "v0.0.3"
+
+vs-agent:
+  name: vs-agent
+  namespace: default
+  replicas: 1
+  domain: example.com
+  ingress:
+    privacy:
+      whitelist: "0.0.0.0/0"
+  images:
+    agent:
+      repository: io2060/2060-service-agent
+      tag: v1.2.0
+    invitationUrl: "https://example.com/invitation.png"
+  adminPort: 3000
+  agentPort: 3001
+  postgresql:
+    enabled: false
+    auth:
+      username: myuser
+      password: mypassword
+      database: mydatabase
+    primary:
+      persistence:
+        enabled: true
+        storageClass: csi-cinder-classic
+        size: 1Gi
+  redis:
+    enabled: false
+    architecture: standalone
+
+    auth:
+      password: myRedisPass123
+
+    persistence:
+      enabled: true
+      storageClass: csi-cinder-classic
+      size: 1Gi
+  extraEnv: []
+  storage:
+    size: 1Gi
+    storageClassName: csi-cinder-high-speed
