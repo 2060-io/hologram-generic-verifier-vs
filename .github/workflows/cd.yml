@@ -5,7 +5,7 @@ env:
 
 on:
   push:
-    branches: [ main, 'fix/create-helm-chart-on-verifier' ]
+    branches: [ main ]
 
 permissions:
   contents: write
@@ -59,12 +59,14 @@ jobs:
             ${{ secrets.DOCKER_HUB_LOGIN }}/${{ env.IMAGE_NAME }}:${{ steps.release-please.outputs.tag_name }}
 
       - name: Log in to Docker Hub Helm Registry
+        if: ${{ steps.release-please.outputs.releases_created == 'true' }}
         run: |
           echo "${{ secrets.DOCKER_HUB_PWD }}" | helm registry login -u "${{ secrets.DOCKER_HUB_LOGIN }}" --password-stdin docker.io
 
       - name: Push Helm chart to Docker Hub OCI repo
+        if: ${{ steps.release-please.outputs.releases_created == 'true' }}
         env:
-          IMAGE_TAG: ${{ github.run_number }}-${{ github.sha }}
+          IMAGE_TAG: ${{ steps.release-please.outputs.tag_name }}
         run: |
           sed -i "s/^version:.*/version: $IMAGE_TAG/" ./charts/Chart.yaml
           helm dependency update ./charts
