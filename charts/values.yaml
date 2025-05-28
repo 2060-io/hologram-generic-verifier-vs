@@ -1,70 +1,50 @@
-name: generic-verifier
-namespace: example
+# === Configuración del chart generic-verifier ===
+name: verifier
+namespace: andres
 containerPort: 2904
-domain: example.com
+domain: example.dev.io
 replicas: 1
+
 service:
-  agent: "https://agent.example.com"
-  credentialTypes: "credential-type-id"
-  issuerDid: "did:example:issuer"
-  issuerLabel: "Example Issuer"
-  issuerImageUrl: "https://example.com/image.png"
+  agent: http://verifier-agent:3000
+  credentialTypes: credential-type-id
+  issuerDid: did:web:unic-id-issuer.demos.dev.2060.io
+  issuerLabel: test-issuer
+  issuerImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+
 images:
   verifier:
-    repository: "io2060/generic-verifier"
-    tag: "v0.0.3"
+    repository: io2060/generic-verifier
+    tag: v0.0.3
 
 vs-agent:
-  vsAgentName: generic-verifier
-  vsAgentNamespace: example
+  vsAgentName: verifier-agent
+  vsAgentNamespace: andres
   vsAgentReplicas: 1
-  vsAgentDomain: example.com
+  vsAgentDomain: example.dev.io
   agentName: test-verifier-agent
-  eventsBaseUrl: https://verifier-agent.test.dev.2060.io
-  redirectDefaultUrlToInvitationUrl: true
+  eventsBaseUrl: https://verifier-agent.example.dev.io
   adminPort: 3000
   agentPort: 3001
   ingress:
     public:
       enableCors: true
-    privacy:
-      whitelist: "0.0.0.0/0"
+
   images:
     agent:
       repository: io2060/2060-service-agent
       tag: v1.2.0
-    invitationUrl: "https://example.com/invitation.png"
+    invitationUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+
   postgresql:
     enabled: false
-    auth:
-      username: myuser
-      password: mypassword
-      database: mydatabase
-    primary:
-      persistence:
-        enabled: true
-        storageClass: csi-cinder-classic
-        size: 1Gi
+
   redis:
     enabled: false
-    architecture: standalone
 
-    auth:
-      password: myRedisPass123
-
-    persistence:
-      enabled: true
-      storageClass: csi-cinder-classic
-      size: 1Gi
-
-
-  # Extra environment variables (extensible)
-  extraEnv:
+  extraEnv: 
     - name: PUBLIC_API_BASE_URL
-      value: https://a.verifier.test.dev.2060.io
+      value: https://a.verifier-agent.example.dev.io
+    - name: USE_CORS
+      value: "true"
 
-
-  # Persistent volume configuration for app
-  storage:
-    size: 1Gi
-    storageClassName: csi-cinder-high-speed
