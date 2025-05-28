@@ -19,6 +19,9 @@ vs-agent:
   vsAgentNamespace: example
   vsAgentReplicas: 1
   vsAgentDomain: example.com
+  agentName: test-verifier-agent
+  eventsBaseUrl: https://verifier-agent.test.dev.2060.io
+  redirectDefaultUrlToInvitationUrl: true
   adminPort: 3000
   agentPort: 3001
   ingress:
