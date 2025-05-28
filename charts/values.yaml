@@ -3,8 +3,6 @@ namespace: example
 containerPort: 2904
 domain: example.com
 replicas: 1
-ingress:
-  enableCors: "true"
 service:
   agent: "https://agent.example.com"
   credentialTypes: "credential-type-id"
