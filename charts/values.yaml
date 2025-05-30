@@ -23,7 +23,7 @@ vs-agent:
   vsAgentReplicas: 1
   vsAgentDomain: example.dev.io
   agentName: test-verifier-agent
-  eventsBaseUrl: https://verifier-agent.example.dev.io
+  eventsBaseUrl: https://verifier.example.dev.io
   adminPort: 3000
   agentPort: 3001
   ingress:
