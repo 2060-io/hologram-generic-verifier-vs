@@ -36,12 +36,6 @@ vs-agent:
       tag: v1.2.0
     invitationUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
 
-  postgresql:
-    enabled: false
-
-  redis:
-    enabled: false
-
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
       value: https://a.verifier-agent.example.dev.io
