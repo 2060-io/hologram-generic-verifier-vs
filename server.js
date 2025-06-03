@@ -27,9 +27,9 @@ function getIssuerInvitationUrl() {
 
 
 app.prepare().then(() => {
-  if (!process.env.SERVICE_AGENT_ADMIN_BASE_URL || !process.env.CREDENTIAL_DEFINITION_ID) {
+  if (!process.env.VS_AGENT_ADMIN_BASE_URL || !process.env.CREDENTIAL_DEFINITION_ID) {
     throw new Error(
-      "Missing environment variables: SERVICE_AGENT_ADMIN_BASE_URL or CREDENTIAL_DEFINITION_ID"
+      "Missing environment variables: VS_AGENT_ADMIN_BASE_URL or CREDENTIAL_DEFINITION_ID"
     );
   }
   
@@ -53,7 +53,7 @@ app.prepare().then(() => {
     let message = {};
     socket.on("generateQR", async (data) => {
       try {
-        const url = `${process.env.SERVICE_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
+        const url = `${process.env.VS_AGENT_ADMIN_BASE_URL}/v1/invitation/presentation-request`;
         const requestBody = {
           callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
           ref: data.socketConnectionId,

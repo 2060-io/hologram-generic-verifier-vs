@@ -1,7 +1,7 @@
 name: Continuous Deployment
 
 env:
-  IMAGE_NAME: generic-verifier
+  IMAGE_NAME: hologram-generic-verifier-app
 
 on:
   push:

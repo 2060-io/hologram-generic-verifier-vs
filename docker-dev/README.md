@@ -29,13 +29,13 @@ services:
     environment:
       - NEXT_PUBLIC_PORT=3000
       - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904
-      - SERVICE_AGENT_ADMIN_BASE_URL=http://192.168.149.127:3000
+      - VS_AGENT_ADMIN_BASE_URL=http://vs-agent:3000
       - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/9rJib8YFi1JdxhdUmjMKEiYj49CNdMa9cEn42z4nouYS
     networks:
       - verifier
 
-  service-agent:
-    image: io2060/2060-service-agent:dev
+  vs-agent:
+    image: io2060/vs-agent:dev
     restart: always
     ports:
       - 3000:3000
@@ -45,7 +45,7 @@ services:
       - PUBLIC_API_BASE_URL=http://192.168.149.127:3001
       - AGENT_ENDPOINT=ws://192.168.149.127:3001 # For deployments, use wss and the assigned public URL
       - USE_CORS=true
-      - EVENTS_BASE_URL=http://192.168.149.127:2904
+      - EVENTS_BASE_URL=http://verifier-app:2904
     volumes:
       - ./afj:/root/.afj
     networks:
