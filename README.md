@@ -1,82 +1,92 @@
-# Generic Verifier
+# Hologram Generic Verifier
 
-This is a **DIDComm Verifiable Service** that allows you to request users to present a verifiable credential using the [Hologram Messaging mobile app](https://hologram.zone/).
+**Hologram Generic Verifier** is an application designed to showcase [VS Agent](https://github.com/2060-io/vs-agent) capabilities to request, verify and show the contents of a Verifiable Presentation by any DIDComm-capable agent, such as [Hologram app](https://hologram.zone). Working alongside VS Agent, it conforms a [Verifiable Service](https://verana-labs.github.io/verifiable-trust-spec/#what-is-a-verifiable-service-vs).
 
-This generic verifiable service can be used to request the presentation of **any type of credential**.
+You can test a deployed demo of this service at [https://gov-id-verifier.demos.dev.2060.io] (TODO: update with production demo)
 
-## Getting Started
+## Features
 
-### In credential JPEG 2000 (JP2) images
+* Allows to request any AnonCreds Verifiable Credential by DIDComm and easily get verification status and claims
+* Allows defining issuer details, in order to let users connect to them in case they don't have the credential you are requesting
+* Supports DIDComm V1 agents using [Present Proof V2](https://github.com/decentralized-identity/aries-rfcs/tree/main/features/0454-present-proof-v2) protocol
+* Dockerized setup for streamlined deployment
 
-Sometimes, Verifiable Credentials derived from passports or ID cards may include images in the **JPEG 2000 (JP2)** format, which is not supported by most web browsers.
+## Configuration
 
-To address this, the project uses a command-line tool called [ImageMagick](https://imagemagick.org/script/command-line-tools.php) to modify and convert images. In particular, converting JP2 images to a more browser-friendly format like **PNG** may be necessary to ensure proper display.
-
-It's recommended to install ImageMagick globally on your system. You can do this by following the official [installation guide](https://imagemagick.org/script/download.php).
-
-Install dependencies
-
-```bash
-yarn install
-```
-
-### Run in developer mode
-
-```bash
-yarn dev
-```
-
-### Run in production mode
-
-```bash
-yarn build && yarn start
-```
-
-### Configuration
-
-At the moment, all configuration is done by environment variables. While most of them are optional for development, this two (`CREDENTIAL_DEFINITION_ID` and `SERVICE_AGENT_ADMIN_BASE_URL`) are mandatory for production and test deployments.
+All settings are configured by environment variables.
 
 | Variable                     | Description                                                                                                         | Default value         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| NEXT_PUBLIC_BASE_URL         | Public URL without port where app is deployed                                                                       | http://localhost:3000 |
+| NEXT_PUBLIC_BASE_URL         | Public URL without port where the app is deployed                                                                       | http://localhost:3000 |
 | NEXT_PUBLIC_PORT             | Port where app is listening                                                                                         | 3000                  |
-| CREDENTIAL_DEFINITION_ID     | Unique identifier or Credential types                                                                               | `none`                |
-| SERVICE_AGENT_ADMIN_BASE_URL | Service agent base URL                                                                                              | `none`                |
+| CREDENTIAL_DEFINITION_ID     | AnonCreds credential definition ID of the credential to request       | `none`                |
+| VS_AGENT_ADMIN_BASE_URL | VS Agent Admin API URL (accessible by the app)                                                                                              | `none`                |
 | ISSUER_DID                   | Optional public DID to let users connect to get their credentials in case they don't have any compatible credential | `none`                |
 | ISSUER_LABEL                 | A label to show in the invitation to credential issuer                                                              | Issuer                |
 | ISSUER_IMAGE_URL             | An URL pointing to an image to show in the invitation to credential issuer                                          | `none`                |
 
-|
+## How to run locally
 
-**Note:** For testing purposes, if you want your service to request the presentation of the **UnicID identity credential**, you should use the following values for `CREDENTIAL_DEFINITION_ID` and `SERVICE_AGENT_ADMIN_BASE_URL`:
+### Prerequisites
 
-- `CREDENTIAL_DEFINITION_ID`:  
-  `did:web:chatbot-demo.dev.2060.io?service=anoncreds&relativeRef=/credDef/HngJhYMeTLTZNa5nJxDybmXDsV8J7G1fz2JFSs3jcouT`
+* Node.js (v20 or higher)
+* Yarn package manager
+* (optional) ImageMagick installed in your system, if your credentials do contain JPEG2000-encoded images. You can do this by following the official [installation guide](https://imagemagick.org/script/download.php).
+* A [VS Agent](https://github.com/2060-io/vs-agent) instance already running and whose admin API is accessibe by your app
 
-- `SERVICE_AGENT_ADMIN_BASE_URL`:  
-  `https://a.chatbot-demo.dev.2060.io`
+### Steps
 
-These values are configured for the **ChatBot demo** and ensure correct functionality in the production environment.
+2. **Install dependencies:**
 
-If you'd like to request the presentation of a **different credential** issued by another service (e.g., one you've deployed yourself), follow these steps to retrieve the correct `CREDENTIAL_DEFINITION_ID`:
+   ```bash
+   yarn install
+   ```
 
-1. Locate the **Service Agent URL** for your deployed service.
-2. Use the Swagger interface to call the method that lists available **credential definitions**.
-3. Set `CREDENTIAL_DEFINITION_ID` to the identifier of your desired credential definition.
+3. **Start the development server:**
 
-### About this app
+   ```bash
+   yarn dev
+   ```
 
-This app was built using [Next.js framework](https://nextjs.org) and [Socket.IO](https://socket.io) for its web socket server.
+   Or:
 
-## How to Use This App
+   **Run in Production mode:**
+
+   ```bash
+   yarn build && yarn start
+   ```
+
+> *NOTE*: You need to define all required environment variables to run it properly
+
+## How to run with Docker
+
+You can use Docker Compose to run a development environment, just by setting up some variables in the [YAML file](./docker-dev/docker-compose.yaml). See this [document](./docker-dev/README.md) for a detailed guide.
+
+## Using the service
+
+Once running, you can test your Verifiable Service by following
 
 1. **Install Hologram Messaging**  
-   First, make sure you have [Hologram Messaging](https://hologram.zone) installed on your device. You can download it from the Google Play Store, Apple App Store, or Huawei App Gallery.
+   First, make sure you have [Hologram Messaging](https://hologram.zone) installed on your mobile device. You can download it from the Google Play Store, Apple App Store, or Huawei App Gallery.
 
-2. **Obtain a Credential from a demo Verifiable Service**  
-   You need a Verifiable Credential issued by an Issuer Verifiable Service to proceed. If you don’t have one yet, and configured default values for `CREDENTIAL_DEFINITION_ID`, obtain your demo credential by connecting to the [UnicID identity credential](https://unic-id-issuer.demos.dev.2060.io/invitation).
+2. **Obtain a Credential from the issuer Verifiable Service**  
+   Your Hologram app's wallet needs to hold a Verifiable Credential that corresponds to `CREDENTIAL_DEFINITION_ID`. If not, make a connection to the issuer service and obtain one.
 
 3. **Scan the QR Code and Present Your Credential**  
-   Open the Hologram app and scan the QR code shown on this web app. The mobile app will prompt you to present the required credential. After presenting it, you should see a confirmation screen similar to the one shown below.
+   Open your web browser into this web app's URL and, in your mobile device, scan the QR code with Hologram: it will prompt you to present the required credential. After presenting it, you should see a confirmation screen similar to the one shown below.
 
    ![presented credential](public/images/presented.png)
+
+
+## Contributing
+
+We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) (TODO) for guidelines on submitting issues and pull requests.
+
+## License
+
+This project is licensed under the [Apache 2.0 License](LICENSE).
+
+## Contact
+
+For questions or support, please open an issue on the [GitHub repository](https://github.com/2060-io/hologram-generic-verifier-app/issues).
+
