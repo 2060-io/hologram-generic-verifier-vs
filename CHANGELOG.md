@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/2060-io/generic-verifier/compare/v0.0.3...v0.0.4) (2025-06-03)
+
+
+### Bug Fixes
+
+* create-helm-chart-on-verifier ([#40](https://github.com/2060-io/generic-verifier/issues/40)) ([923cd31](https://github.com/2060-io/generic-verifier/commit/923cd3173e04fb6de403481ea5f1844b941b0178))
+
 ## [0.0.3](https://github.com/2060-io/generic-verifier/compare/v0.0.2...v0.0.3) (2025-05-26)
 
 
