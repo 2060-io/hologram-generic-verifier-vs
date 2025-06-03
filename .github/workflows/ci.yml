@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout service-agent
+      - name: Checkout hologram-generic-verifier-app
         uses: actions/checkout@v4
       
       - name: Setup Helm

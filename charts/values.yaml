@@ -31,7 +31,7 @@ vs-agent:
 
   images:
     agent:
-      repository: io2060/2060-service-agent
+      repository: io2060/vs-agent
       tag: v1.2.0
     invitationUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
 
