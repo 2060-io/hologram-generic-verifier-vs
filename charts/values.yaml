@@ -1,6 +1,6 @@
 # === Configuración del chart generic-verifier ===
 name: verifier
-namespace: andres
+namespace: default
 containerPort: 2904
 domain: example.dev.io
 replicas: 1
@@ -19,7 +19,7 @@ images:
 
 vs-agent:
   vsAgentName: verifier-agent
-  vsAgentNamespace: andres
+  vsAgentNamespace: default
   vsAgentReplicas: 1
   vsAgentDomain: example.dev.io
   agentName: test-verifier-agent
