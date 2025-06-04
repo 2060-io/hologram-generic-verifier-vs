@@ -2,7 +2,7 @@
 
 **Hologram Generic Verifier** is an application designed to showcase [VS Agent](https://github.com/2060-io/vs-agent) capabilities to request, verify and show the contents of a Verifiable Presentation by any DIDComm-capable agent, such as [Hologram app](https://hologram.zone). Working alongside VS Agent, it conforms a [Verifiable Service](https://verana-labs.github.io/verifiable-trust-spec/#what-is-a-verifiable-service-vs).
 
-You can test a deployed demo of this service at [https://gov-id-verifier.demos.dev.2060.io] (TODO: update with production demo)
+You can test a deployed demo of this service at [https://hologram-gov-id-verifier.demos.dev.2060.io] (TODO: update with production demo)
 
 ## Features
 
@@ -15,15 +15,24 @@ You can test a deployed demo of this service at [https://gov-id-verifier.demos.d
 
 All settings are configured by environment variables.
 
+### Summary
+
 | Variable                     | Description                                                                                                         | Default value         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| NEXT_PUBLIC_BASE_URL         | Public URL without port where the app is deployed                                                                       | http://localhost:3000 |
+| NEXT_PUBLIC_BASE_URL         | Public URL (without port) where the app is deployed                                                                       | http://localhost:3000 |
 | NEXT_PUBLIC_PORT             | Port where app is listening                                                                                         | 3000                  |
 | CREDENTIAL_DEFINITION_ID     | AnonCreds credential definition ID of the credential to request       | `none`                |
 | VS_AGENT_ADMIN_BASE_URL | VS Agent Admin API URL (accessible by the app)                                                                                              | `none`                |
 | ISSUER_DID                   | Optional public DID to let users connect to get their credentials in case they don't have any compatible credential | `none`                |
-| ISSUER_LABEL                 | A label to show in the invitation to credential issuer                                                              | Issuer                |
-| ISSUER_IMAGE_URL             | An URL pointing to an image to show in the invitation to credential issuer                                          | `none`                |
+| ISSUER_LABEL                 | Optional label to show in the invitation to credential issuer                                                              | Issuer                |
+| ISSUER_IMAGE_URL             | Optional URL pointing to an image to show in the invitation to credential issuer                                          | `none`                |
+| ISSUER_VS_AGENT_ADMIN_BASE_URL          | Optional Issuer VS Agent Admin URL: in case no Credential Definition is specified, the Verifier will attempt to get the first credential type from this URL and will use its Credential Definition ID for its requests. Make sure that Generic Verifier has access to it. | `none`                |
+
+### Overview
+
+The minimal setup for Generic Verifier app requires to define a `VS_AGENT_ADMIN_BASE_URL` where its VS Agent is located, and either `CREDENTIAL_DEFINITION_ID` or `ISSUER_VS_AGENT_ADMIN_BASE_URL`. If you know beforehand the ID of the credential type you want the verifier to ask for presentation, you can just define the first. Otherwise, specify the Issuer VS Agent Admin URL location, so the verifier will dynamically use the first available credential type. This is useful to speed-up demo deployment in cases where credential definition IDs are not deterministic, such as did:web AnonCreds.
+
+There are also some other optional variables about the Issuer: `ISSUER_DID`, `ISSUER_LABEL` and `ISSUER_IMAGE_URL`. They are defined to allow the creation of an implicit DIDComm out of band invitation to the issuer service, to redirect the user when they don't have the requested credential in their wallet. If you don't specify them it is fine: Generic Verifier will simply show a "no compatible credentials" error in the web frontend.
 
 ## How to run locally
 
