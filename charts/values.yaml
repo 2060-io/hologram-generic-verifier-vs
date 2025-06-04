@@ -16,7 +16,7 @@ images:
     repository: io2060/hologram-generic-verifier-app
     tag: v0.0.5
 
-vs-agent:
+vs-agent-chart:
   vsAgentName: verifier-agent
   vsAgentNamespace: default
   vsAgentReplicas: 1
