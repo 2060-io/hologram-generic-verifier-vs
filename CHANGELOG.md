@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v0.0.4...v0.0.5) (2025-06-04)
+
+
+### Bug Fixes
+
+* update chart name ([#43](https://github.com/2060-io/hologram-generic-verifier-vs/issues/43)) ([eadf72d](https://github.com/2060-io/hologram-generic-verifier-vs/commit/eadf72d64eea2ea08497986f7e37db4c8afb9c4b))
+
 ## [0.0.4](https://github.com/2060-io/generic-verifier/compare/v0.0.3...v0.0.4) (2025-06-03)
 
 
