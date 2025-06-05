@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v0.0.5...v0.0.6) (2025-06-05)
+
+
+### Features
+
+* dynamically credential type from issuer ([#45](https://github.com/2060-io/hologram-generic-verifier-vs/issues/45)) ([47917ec](https://github.com/2060-io/hologram-generic-verifier-vs/commit/47917ec96a2cd6610ff00528f00c628855aacf73))
+
 ## [0.0.5](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v0.0.4...v0.0.5) (2025-06-04)
 
 
