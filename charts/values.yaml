@@ -37,7 +37,7 @@ vs-agent-chart:
 
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
-      value: https://a.verifier-agent.example.dev.io
+      value: https://verifier-agent.example.dev.io
     - name: USE_CORS
       value: "true"
 
