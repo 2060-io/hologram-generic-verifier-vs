@@ -26,13 +26,44 @@ function getIssuerInvitationUrl() {
 }
 
 
-app.prepare().then(() => {
-  if (!process.env.VS_AGENT_ADMIN_BASE_URL || !process.env.CREDENTIAL_DEFINITION_ID) {
+app.prepare().then(async () => {
+  if (!process.env.VS_AGENT_ADMIN_BASE_URL) {
     throw new Error(
-      "Missing environment variables: VS_AGENT_ADMIN_BASE_URL or CREDENTIAL_DEFINITION_ID"
+      "Missing VS_AGENT_ADMIN_BASE_URL environment variable"
     );
   }
-  
+
+  // Now attempt to get the credential definition id, either from the environment variable or the specified
+  // issuer (provided it does have a VS Agent accessible by us)
+  let credentialDefinitionId = process.env.CREDENTIAL_DEFINITION_ID
+
+  if (!credentialDefinitionId) {
+
+    const issuerVsAgentAdminBaseUrl = process.env.ISSUER_VS_AGENT_ADMIN_BASE_URL
+
+    if (!issuerVsAgentAdminBaseUrl) {
+      throw new Error(
+        "You must define a CREDENTIAL_DEFINITION_ID, or ISSUER_VS_AGENT_ADMIN_BASE_URL to get the credential definition to request"
+      );
+    }
+
+    const url = `${issuerVsAgentAdminBaseUrl}/v1/credential-types`;
+    const response = await fetch(url, {
+      headers: {
+        "accept": "application/json",
+        },
+        method: "GET",
+      });
+    const result = await response.json();
+
+    const firstCredDefId = result[0]?.id
+    if (!firstCredDefId) throw Error('VS Agent response does not contain any valid credential type')
+    credentialDefinitionId = firstCredDefId
+  }
+
+
+  console.log(`Credential Definition ID: ${credentialDefinitionId}`)
+
   const PORT = process.env.NEXT_PUBLIC_PORT
     ? Number(process.env.NEXT_PUBLIC_PORT)
     : 3000;
@@ -59,7 +90,7 @@ app.prepare().then(() => {
           ref: data.socketConnectionId,
           requestedCredentials: [
             { 
-              credentialDefinitionId: process.env.CREDENTIAL_DEFINITION_ID
+              credentialDefinitionId
             },
           ],
         };
@@ -71,7 +102,7 @@ app.prepare().then(() => {
           body: JSON.stringify(requestBody),
         });
         const result = await response.json();
-        if (!result.shortUrl) throw Error('Result from Service Agent does not contain any short URL')
+        if (!result.shortUrl) throw Error('Result from VS Agent does not contain any short URL')
         message = {
           ok: true,
           invitationUrl: `https://hologram.zone/?_url=${Buffer.from(result.shortUrl).toString('base64url')}`,
