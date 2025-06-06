@@ -19,7 +19,6 @@ The `vs-agent` chart can be found here: [vs-agent GitHub Repository](https://git
 ## Configuration
 
 ### Key Variables
-- **`CREDENTIAL_DEFINITION_ID`**: This variable can be used to specify the credential definition ID. However, it is recommended to point directly to the admin port of the service that generates the credential instead.
 - **Database Support**: The `vs-agent` allows the use of a database, but it is not required for this deployment.
 
 ### Step-by-Step Configuration
