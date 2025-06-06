@@ -25,7 +25,7 @@ extraEnv:
   # - name: CREDENTIAL_DEFINITION_ID
   #   value: "my-credential-definition-id"
 
-# If you want to use the issuer-vs chart, you can enable it by setting the following:
+# If you want to use the vs-agent-chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true
 vs-agent-chart:
   enabled: false
