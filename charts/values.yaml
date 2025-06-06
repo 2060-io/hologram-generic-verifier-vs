@@ -23,7 +23,7 @@ extraEnv:
     value: "http://issuer:3000"
   # Optional: If you want to set the CREDENTIAL_DEFINITION_ID, uncomment the following line and set the value accordingly
   # - name: CREDENTIAL_DEFINITION_ID
-  #   value: "http://issuer:3000"
+  #   value: "my-credential-definition-id"
 
 # If you want to use the issuer-vs chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true
