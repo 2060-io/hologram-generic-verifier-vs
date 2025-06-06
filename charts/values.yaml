@@ -7,23 +7,19 @@ domain: example.dev.io
 replicas: 1
 
 service:
-  agent: http://verifier-agent:3000
+  vsAgentAdminBaseUrl: http://verifier-agent:3000
   issuerDid: did:web:issuer.example.dev.io
   issuerLabel: test-issuer
   issuerImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+  # Use only if you want to use the vs-agent with a credential definition Id
+  # If you use both credentialDefinitionId and issuerVsAgentAdminBaseUrl, the issuerVsAgentAdminBaseUrl will be ignored
+  credentialDefinitionId: credential-definition-id
+  # issuerVsAgentAdminBaseUrl: http://issuer:3000
 
 images:
   verifier:
     repository: io2060/hologram-generic-verifier-app
     tag: v0.0.7
-
-# Environment variables for the Generic Verifier application
-extraEnv:
-  - name: ISSUER_VS_AGENT_ADMIN_BASE_URL
-    value: "http://issuer:3000"
-  # Optional: If you want to set the CREDENTIAL_DEFINITION_ID, uncomment the following line and set the value accordingly
-  # - name: CREDENTIAL_DEFINITION_ID
-  #   value: "my-credential-definition-id"
 
 # If you want to use the vs-agent-chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true
