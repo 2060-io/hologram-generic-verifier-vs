@@ -24,7 +24,7 @@ vs-agent-chart:
   namespace: default
   replicas: 1
   domain: example.dev.io
-  agentName: test-verifier-agent
+  didcommLabel: test-verifier-agent
   eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
   agentInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
   adminPort: 3000
