@@ -26,7 +26,7 @@ vs-agent-chart:
   domain: example.dev.io
   didcommLabel: test-verifier-agent
   eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
-  agentInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+  didcommInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
   adminPort: 3000
   agentPort: 3001
   ingress:
