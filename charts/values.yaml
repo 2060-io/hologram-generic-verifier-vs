@@ -1,3 +1,5 @@
+# Hologram Generic Verifier Chart Values
+# This file contains the default values for the Hologram Generic Verifier Helm chart.
 name: hologram-generic-verifier-vs
 namespace: default
 containerPort: 2904
@@ -5,35 +7,31 @@ domain: example.dev.io
 replicas: 1
 
 service:
-  agent: http://verifier-agent:3000
-  credentialTypes: credential-type-id
-  issuerDid: did:web:unic-id-issuer.demos.dev.2060.io
+  vsAgentAdminBaseUrl: http://verifier-agent:3000
+  issuerDid: did:web:issuer.example.dev.io
   issuerLabel: test-issuer
   issuerImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+  # Use only if you want to use the vs-agent with a credential definition Id
+  # If you use both credentialDefinitionId and issuerVsAgentAdminBaseUrl, the issuerVsAgentAdminBaseUrl will be ignored
+  credentialDefinitionId: credential-definition-id
+  # issuerVsAgentAdminBaseUrl: http://issuer:3000
 
-images:
-  verifier:
-    repository: io2060/hologram-generic-verifier-app
-    tag: v0.0.5
-
+# If you want to use the vs-agent-chart, you can enable it by setting the following:
+# vs-agent-chart.enabled: true
 vs-agent-chart:
-  vsAgentName: verifier-agent
-  vsAgentNamespace: default
-  vsAgentReplicas: 1
-  vsAgentDomain: example.dev.io
-  agentName: test-verifier-agent
-  eventsBaseUrl: https://verifier.example.dev.io
+  enabled: false
+  name: verifier-agent
+  namespace: default
+  replicas: 1
+  domain: example.dev.io
+  didcommLabel: test-verifier-agent
+  eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
+  didcommInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
   adminPort: 3000
-  agentPort: 3001
+  didcommPort: 3001
   ingress:
     public:
       enableCors: true
-
-  images:
-    agent:
-      repository: io2060/vs-agent
-      tag: v1.2.0
-    invitationUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
 
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
