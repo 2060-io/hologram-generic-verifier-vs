@@ -58,7 +58,7 @@ spec:
       spec:
          containers:
          -  name: {{ .Values.name }}
-            image: "{{ .Values.images.verifier.repository }}:{{ .Values.images.verifier.tag }}"
+            image: io2060/hologram-generic-verifier-app:{{ .Chart.Version }}
             imagePullPolicy: Always
             env:
             - name: NEXT_PUBLIC_PORT

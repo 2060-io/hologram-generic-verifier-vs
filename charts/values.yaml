@@ -16,11 +16,6 @@ service:
   credentialDefinitionId: credential-definition-id
   # issuerVsAgentAdminBaseUrl: http://issuer:3000
 
-images:
-  verifier:
-    repository: io2060/hologram-generic-verifier-app
-    tag: v0.0.7
-
 # If you want to use the vs-agent-chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true
 vs-agent-chart:
@@ -31,22 +26,12 @@ vs-agent-chart:
   domain: example.dev.io
   agentName: test-verifier-agent
   eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
-  database:
-    enabled: false
+  agentInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
   adminPort: 3000
   agentPort: 3001
   ingress:
     public:
       enableCors: true
-
-  images:
-    agent:
-      repository: io2060/vs-agent
-      tag: dev
-    invitationUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
-    redis: 
-      # Dont forget to set the redis.enabled to true if you want to use the vs-agent with a redis  
-      enabled: false
 
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
