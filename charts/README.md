@@ -44,7 +44,7 @@ vs-agent-chart:
   replicas: 1
   domain: example.io
   adminPort: 3000
-  agentPort: 3001
+  didcommPort: 3001
 ```
 
 ## Installation

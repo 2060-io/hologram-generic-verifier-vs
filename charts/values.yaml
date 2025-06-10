@@ -28,7 +28,7 @@ vs-agent-chart:
   eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
   didcommInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
   adminPort: 3000
-  agentPort: 3001
+  didcommPort: 3001
   ingress:
     public:
       enableCors: true
