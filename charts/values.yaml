@@ -1,16 +1,17 @@
 # Hologram Generic Verifier Chart Values
 # This file contains the default values for the Hologram Generic Verifier Helm chart.
+global:
+  domain: example.dev.io
+
 name: hologram-generic-verifier-vs
-namespace: default
 containerPort: 2904
-domain: example.dev.io
 replicas: 1
 
 service:
   vsAgentAdminBaseUrl: http://verifier-agent:3000
-  issuerDid: did:web:issuer.example.dev.io
+  issuerDid: did:web:issuer.{{ .Values.global.domain }}
   issuerLabel: test-issuer
-  issuerImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+  issuerImageUrl: https://i.unic-id-issuer.{{ .Values.global.domain }}/avatar.png
   # Use only if you want to use the vs-agent with a credential definition Id
   # If you use both credentialDefinitionId and issuerVsAgentAdminBaseUrl, the issuerVsAgentAdminBaseUrl will be ignored
   credentialDefinitionId: credential-definition-id
@@ -21,21 +22,13 @@ service:
 vs-agent-chart:
   enabled: false
   name: verifier-agent
-  namespace: default
-  replicas: 1
-  domain: example.dev.io
   didcommLabel: test-verifier-agent
-  eventsBaseUrl: https://hologram-generic-verifier-vs.example.dev.io
+  eventsBaseUrl: http://hologram-generic-verifier-vs:2904
   didcommInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
-  adminPort: 3000
-  didcommPort: 3001
-  ingress:
-    public:
-      enableCors: true
 
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
-      value: https://verifier-agent.example.dev.io
+      value: "https://{{ .Values.name }}.{{ .Values.global.domain }}"
     - name: USE_CORS
       value: "true"
 

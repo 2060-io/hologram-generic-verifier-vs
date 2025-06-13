@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.name }}
 spec:
@@ -19,17 +19,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - {{ .Values.name }}.{{ .Values.domain }}
-      secretName: {{ .Values.name }}.{{ .Values.domain }}-cert
+        - {{ .Values.name }}.{{ .Values.global.domain }}
+      secretName: {{ .Values.name }}.{{ .Values.global.domain }}-cert
   rules:
-    - host: {{ .Values.name }}.{{ .Values.domain }}
+    - host: {{ .Values.name }}.{{ .Values.global.domain }}
       http:
         paths:
           - path: /
@@ -44,7 +44,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
    name: {{ .Values.name }}
-   namespace: {{ .Values.namespace }}
+   namespace: {{ .Release.Namespace }}
 spec:
    serviceName: {{ .Values.name }}
    replicas: {{ .Values.replicas }}
@@ -64,15 +64,15 @@ spec:
             - name: NEXT_PUBLIC_PORT
               value: "{{ .Values.containerPort }}"
             - name: NEXT_PUBLIC_BASE_URL
-              value: "https://{{ .Values.name }}.{{ .Values.domain }}"
+              value: "https://{{ .Values.name }}.{{ .Values.global.domain }}"
             - name: VS_AGENT_ADMIN_BASE_URL
               value: "{{ .Values.service.vsAgentAdminBaseUrl }}"
             - name: ISSUER_DID
-              value: "{{ .Values.service.issuerDid }}"
+              value: "{{ tpl .Values.service.issuerDid . }}"
             - name: ISSUER_LABEL
               value: "{{ .Values.service.issuerLabel }}"
             - name: ISSUER_IMAGE_URL
-              value: "{{ .Values.service.issuerImageUrl }}"
+              value: "{{ tpl .Values.service.issuerImageUrl . }}"
             - name: CREDENTIAL_DEFINITION_ID
               value: "{{ .Values.service.credentialDefinitionId }}"
             - name: ISSUER_VS_AGENT_ADMIN_BASE_URL
