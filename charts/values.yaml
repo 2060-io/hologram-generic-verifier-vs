@@ -14,8 +14,11 @@ service:
   issuerImageUrl: https://i.unic-id-issuer.{{ .Values.global.domain }}/avatar.png
   # Use only if you want to use the vs-agent with a credential definition Id
   # If you use both credentialDefinitionId and issuerVsAgentAdminBaseUrl, the issuerVsAgentAdminBaseUrl will be ignored
-  credentialDefinitionId: credential-definition-id
-  # issuerVsAgentAdminBaseUrl: http://issuer:3000
+
+  # Is required if you want to use the vs-agent with a credential definition Id or issuerVsAgentAdminBaseUrl
+  # You can use one of the following:
+  # credentialDefinitionId: <credential-definition-id>
+  # issuerVsAgentAdminBaseUrl: http://<issuer-vs-agent-admin-base-url>:<port>
 
 # If you want to use the vs-agent-chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true
