@@ -7,6 +7,10 @@ name: hologram-generic-verifier-vs
 containerPort: 2904
 replicas: 1
 
+ingress:
+  host: "{{ .Values.name }}.{{ .Values.global.domain }}"
+  tlsSecret: public.{{ .Values.name }}.{{ .Values.global.domain }}-cert
+
 service:
   vsAgentAdminBaseUrl: http://verifier-agent:3000
   issuerDid: did:web:issuer.{{ .Values.global.domain }}
@@ -25,6 +29,9 @@ vs-agent-chart:
   didcommLabel: test-verifier-agent
   eventsBaseUrl: http://hologram-generic-verifier-vs:2904
   didcommInvitationImageUrl: https://i.unic-id-issuer.demos.dev.2060.io/avatar.png
+  ingress:
+    host: "{{ .Values.name }}.{{ .Values.global.domain }}" # Host for the vs agent service
+    tlsSecret: public.{{ .Values.name }}.{{ .Values.global.domain }}-cert # TLS secret for the vs agent service
 
   extraEnv: 
     - name: PUBLIC_API_BASE_URL
