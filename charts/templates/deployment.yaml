@@ -26,10 +26,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - {{ .Values.name }}.{{ .Values.global.domain }}
-      secretName: {{ .Values.name }}.{{ .Values.global.domain }}-cert
+        - {{ tpl .Values.ingress.host . }}
+      secretName: {{ tpl .Values.ingress.tlsSecret . }}
   rules:
-    - host: {{ .Values.name }}.{{ .Values.global.domain }}
+    - host: {{ tpl .Values.ingress.host . }}
       http:
         paths:
           - path: /
@@ -64,7 +64,7 @@ spec:
             - name: NEXT_PUBLIC_PORT
               value: "{{ .Values.containerPort }}"
             - name: NEXT_PUBLIC_BASE_URL
-              value: "https://{{ .Values.name }}.{{ .Values.global.domain }}"
+              value: "https://{{ tpl .Values.ingress.host . }}"
             - name: VS_AGENT_ADMIN_BASE_URL
               value: "{{ .Values.service.vsAgentAdminBaseUrl }}"
             - name: ISSUER_DID
