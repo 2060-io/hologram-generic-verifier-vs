@@ -66,16 +66,16 @@ spec:
             - name: NEXT_PUBLIC_BASE_URL
               value: "https://{{ tpl .Values.ingress.host . }}"
             - name: VS_AGENT_ADMIN_BASE_URL
-              value: "{{ tpl .Values.service.vsAgentAdminBaseUrl . }}"
+              value: "{{ .Values.service.vsAgentAdminBaseUrl }}"
             - name: ISSUER_DID
               value: "{{ tpl .Values.service.issuerDid . }}"
             - name: ISSUER_LABEL
-              value: "{{ tpl .Values.service.issuerLabel . }}"
+              value: "{{ .Values.service.issuerLabel }}"
             - name: ISSUER_IMAGE_URL
               value: "{{ tpl .Values.service.issuerImageUrl . }}"
             - name: CREDENTIAL_DEFINITION_ID
-              value: "{{ tpl .Values.service.credentialDefinitionId . }}"
+              value: "{{ .Values.service.credentialDefinitionId }}"
             - name: ISSUER_VS_AGENT_ADMIN_BASE_URL
-              value: "{{ tpl .Values.service.issuerVsAgentAdminBaseUrl . }}"
+              value: "{{ .Values.service.issuerVsAgentAdminBaseUrl }}"
             ports:
             -  containerPort: {{ .Values.containerPort }}
