@@ -55,7 +55,7 @@ const convertBase64JP2ToPNGBase64 = (jp2ImageBase64: string) => {
       }
     } else {
       reject(
-        "Your system does not have imagemagick installed. First, install it and try again"
+        "Your system does not have imagemagick installed. First, install it and try again",
       );
     }
   });

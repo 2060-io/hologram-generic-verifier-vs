@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-const socketIo = io(process.env.NEXT_PUBLIC_BASE_URL, { transports: ["polling"] });
+const socketIo = io(process.env.NEXT_PUBLIC_BASE_URL, {
+  transports: ["polling"],
+});
 
 export async function POST(req: Request) {
   try {
