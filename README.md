@@ -2,7 +2,7 @@
 
 **Hologram Generic Verifier** is an application designed to showcase [VS Agent](https://github.com/2060-io/vs-agent) capabilities to request, verify and show the contents of a Verifiable Presentation by any DIDComm-capable agent, such as [Hologram app](https://hologram.zone). Working alongside VS Agent, it conforms a [Verifiable Service](https://verana-labs.github.io/verifiable-trust-spec/#what-is-a-verifiable-service-vs).
 
-You can test a deployed demo of this service at [https://hologram-gov-id-verifier.demos.dev.2060.io] (TODO: update with production demo)
+You can test a deployed demo of this service [here](https://gov-id-verifier.demos.2060.io)
 
 ## Features
 
