@@ -10,9 +10,12 @@ import Presentation from "./presentation";
 export default function Home() {
   const t = useTranslations();
   const { presentationEventMessage, requestQRState } = useSocket();
-  
+
   useEffect(() => {
-    if (requestQRState.invitationUrl && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    if (
+      requestQRState.invitationUrl &&
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+    ) {
       window.location.href = requestQRState.invitationUrl;
     }
   }, [requestQRState.invitationUrl]);

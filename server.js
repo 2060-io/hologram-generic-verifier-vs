@@ -28,9 +28,10 @@ function getIssuerInvitationUrl() {
 
 app.prepare().then(async () => {
   if (!process.env.VS_AGENT_ADMIN_BASE_URL) {
-    throw new Error(
+    console.error(
       "Missing VS_AGENT_ADMIN_BASE_URL environment variable"
     );
+    process.exit(1);
   }
 
   // Now attempt to get the credential definition id, either from the environment variable or the specified
@@ -42,9 +43,10 @@ app.prepare().then(async () => {
     const issuerVsAgentAdminBaseUrl = process.env.ISSUER_VS_AGENT_ADMIN_BASE_URL
 
     if (!issuerVsAgentAdminBaseUrl) {
-      throw new Error(
+      console.error(
         "You must define a CREDENTIAL_DEFINITION_ID, or ISSUER_VS_AGENT_ADMIN_BASE_URL to get the credential definition to request"
       );
+      process.exit(1);
     }
 
     const url = `${issuerVsAgentAdminBaseUrl}/v1/credential-types`;

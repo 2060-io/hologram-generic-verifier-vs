@@ -59,7 +59,7 @@ export const useSocket = () => {
             issuerInvitationUrl,
           });
         }
-      }
+      },
     );
 
     return () => {
