@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.2...v1.0.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* update reboot behavior ([#61](https://github.com/2060-io/hologram-generic-verifier-vs/issues/61)) ([49eeab7](https://github.com/2060-io/hologram-generic-verifier-vs/commit/49eeab760e7576a87cf5a80e17c9de5cc20f1dfc))
+
 ## [1.0.2](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.1...v1.0.2) (2025-06-18)
 
 
