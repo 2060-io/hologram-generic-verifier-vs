@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.3...v1.1.0) (2025-07-29)
+
+
+### Features
+
+* add health endpoint and k8s liveness/readiness probes ([#63](https://github.com/2060-io/hologram-generic-verifier-vs/issues/63)) ([0b2f2a4](https://github.com/2060-io/hologram-generic-verifier-vs/commit/0b2f2a469d2d624ecc3ce7f0886a58a8f8eae8bc))
+
 ## [1.0.3](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.2...v1.0.3) (2025-07-08)
 
 
