@@ -76,6 +76,12 @@ app.prepare().then(async () => {
 
   const server = createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
+    if (parsedUrl.pathname === "/health") {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ status: "ok" }));
+      return;
+    }
     handle(req, res, parsedUrl);
   });
 

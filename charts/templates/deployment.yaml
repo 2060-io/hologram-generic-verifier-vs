@@ -79,3 +79,19 @@ spec:
               value: "{{ .Values.service.issuerVsAgentAdminBaseUrl }}"
             ports:
             -  containerPort: {{ .Values.containerPort }}
+            livenessProbe:
+              httpGet:
+                path: /health
+                port: {{ .Values.containerPort }}
+              initialDelaySeconds: 30
+              periodSeconds: 60
+              timeoutSeconds: 5
+              failureThreshold: 3
+            readinessProbe:
+              httpGet:
+                path: /health
+                port: {{ .Values.containerPort }}
+              initialDelaySeconds: 15
+              periodSeconds: 60
+              timeoutSeconds: 5
+              failureThreshold: 3
