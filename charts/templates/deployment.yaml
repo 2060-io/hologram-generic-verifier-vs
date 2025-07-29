@@ -86,7 +86,7 @@ spec:
               initialDelaySeconds: 30
               periodSeconds: 60
               timeoutSeconds: 5
-              failureThreshold: 3
+              failureThreshold: 2
             readinessProbe:
               httpGet:
                 path: /health
@@ -94,4 +94,4 @@ spec:
               initialDelaySeconds: 15
               periodSeconds: 60
               timeoutSeconds: 5
-              failureThreshold: 3
+              failureThreshold: 2
