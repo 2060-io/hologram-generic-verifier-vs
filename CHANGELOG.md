@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.3...v1.1.0) (2025-09-02)
+
+
+### Features
+
+* add health endpoint and k8s liveness/readiness probes ([#63](https://github.com/2060-io/hologram-generic-verifier-vs/issues/63)) ([0b2f2a4](https://github.com/2060-io/hologram-generic-verifier-vs/commit/0b2f2a469d2d624ecc3ce7f0886a58a8f8eae8bc))
+* **chart:** update vs-agent to latest alpha ([#65](https://github.com/2060-io/hologram-generic-verifier-vs/issues/65)) ([2703c60](https://github.com/2060-io/hologram-generic-verifier-vs/commit/2703c60759658d24737b03478bf513dbf047f07d))
+
+
+### Bug Fixes
+
+* replace throw error by default proccess exit ([#67](https://github.com/2060-io/hologram-generic-verifier-vs/issues/67)) ([c6934b9](https://github.com/2060-io/hologram-generic-verifier-vs/commit/c6934b94f1aaa99a310da4ed09033f90febc9531))
+
 ## [1.0.3](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.0.2...v1.0.3) (2025-07-08)
 
 
