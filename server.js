@@ -50,17 +50,25 @@ app.prepare().then(async () => {
     }
 
     const url = `${issuerVsAgentAdminBaseUrl}/v1/credential-types`;
-    const response = await fetch(url, {
-      headers: {
-        "accept": "application/json",
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "accept": "application/json",
         },
         method: "GET",
       });
-    const result = await response.json();
-
-    const firstCredDefId = result[0]?.id
-    if (!firstCredDefId) throw Error('VS Agent response does not contain any valid credential type')
-    credentialDefinitionId = firstCredDefId
+      const result = await response.json();
+  
+      const firstCredDefId = result[0]?.id
+      if (!firstCredDefId) {
+        console.error('VS Agent response does not contain any valid credential type');
+        process.exit(1);
+      }
+      credentialDefinitionId = firstCredDefId
+    } catch (error) {
+      console.error('Error fetching credential types:', error);
+      process.exit(1);
+    }
   }
 
 
@@ -121,6 +129,7 @@ app.prepare().then(async () => {
           ok: false,
           error: `${error}`,
         };
+        process.exit(1);
       } finally {
         io.to(data.socketConnectionId).emit("generateQREventMessage", {
           ...message,
