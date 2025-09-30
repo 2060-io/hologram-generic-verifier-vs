@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.0...v1.2.1) (2025-09-30)
+
+
+### Bug Fixes
+
+* bump version ([5b78fb7](https://github.com/2060-io/hologram-generic-verifier-vs/commit/5b78fb730096ab9d7a6344e38c5a6a5f9823d077))
+
 ## [1.2.0](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.1.0...v1.2.0) (2025-09-16)
 
 
