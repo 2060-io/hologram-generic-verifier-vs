@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.1...v1.2.2) (2025-10-06)
+
+
+### Bug Fixes
+
+* PUBLIC_API_BASE_URL is now controlled by AGENT_PUBLIC_DID ([#75](https://github.com/2060-io/hologram-generic-verifier-vs/issues/75)) ([cd17ea4](https://github.com/2060-io/hologram-generic-verifier-vs/commit/cd17ea48f7d0ca1651dc02635f936312c6eee0eb))
+
 ## [1.2.1](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.0...v1.2.1) (2025-09-30)
 
 
