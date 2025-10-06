@@ -34,8 +34,6 @@ vs-agent-chart:
     tlsSecret: public.{{ .Values.name }}.{{ .Values.global.domain }}-cert # TLS secret for the vs agent service
 
   extraEnv: 
-    - name: PUBLIC_API_BASE_URL
-      value: "https://{{ .Values.name }}.{{ .Values.global.domain }}"
     - name: USE_CORS
       value: "true"
 
