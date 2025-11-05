@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.3](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.2...v1.2.3) (2025-11-05)
+
+
+### Bug Fixes
+
+* update vs agent ([#78](https://github.com/2060-io/hologram-generic-verifier-vs/issues/78)) ([2766d15](https://github.com/2060-io/hologram-generic-verifier-vs/commit/2766d1508673b7d32302ca9f23721332b4a47e99))
+* update vs agent with v1.6.0-dev ([#80](https://github.com/2060-io/hologram-generic-verifier-vs/issues/80)) ([c48ca78](https://github.com/2060-io/hologram-generic-verifier-vs/commit/c48ca78b7d778a109e2a0460fef49138fbf22356))
+
 ## [1.2.2](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.1...v1.2.2) (2025-10-06)
 
 
