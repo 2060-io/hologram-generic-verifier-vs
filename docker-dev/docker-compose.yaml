@@ -10,6 +10,9 @@ services:
     restart: always
     environment:
       - NEXT_PUBLIC_PORT=3000
+      - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904
+      - VS_AGENT_ADMIN_BASE_URL=http://vs-agent:3000
+      - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/3Wa9tm1YbVZ9YEpT5Cdxm6KAtDFsoTJJyDNBbYGzBhhp
       - ISSUER_DID=did:webvh:QmU1tBocQ6oZN3zaPFrx9hjB5BnzQr1Kb1GvKqY144Qjjp:dm.gov-id-issuer.demos.dev.2060.io
       - ISSUER_LABEL=Gov ID Issuer
     networks:
