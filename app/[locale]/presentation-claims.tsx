@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { Claim } from "@/app/lib/definitions";
+import Image from 'next/image'
+import { Claim } from '@/app/lib/definitions'
 
 export default function PresentationClaims({ claims }: { claims: Claim[] }) {
   return (
@@ -9,17 +9,13 @@ export default function PresentationClaims({ claims }: { claims: Claim[] }) {
           {claims.map((item, index) => (
             <tr
               key={item.key}
-              className={
-                index % 2 === 0
-                  ? "bg-gray-50 dark:bg-slate-900"
-                  : "bg-white dark:bg-gray-950"
-              }
+              className={index % 2 === 0 ? 'bg-gray-50 dark:bg-slate-900' : 'bg-white dark:bg-gray-950'}
             >
               <td className="py-2 px-4 border-b border-r border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-600 dark:text-gray-300">
                 <span className="text-base">{item.key}</span>
               </td>
               <td className="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
-                {item.type === "image" ? (
+                {item.type === 'image' ? (
                   <Image
                     className="w-1/3 h-1/3 object-cover"
                     src={item.value}
@@ -38,5 +34,5 @@ export default function PresentationClaims({ claims }: { claims: Claim[] }) {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
