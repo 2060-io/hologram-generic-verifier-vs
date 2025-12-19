@@ -9,7 +9,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci:
-    uses: 2060-io/organization/.github/workflows/2060-linter-call.yml@main
-    with:
-      charts-dir: ./charts
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout hologram-generic-verifier-app
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run lint
+        run: yarn check-types && yarn check-format
+      
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+
+      - name: Validate Helm chart
+        run: helm lint ./charts
