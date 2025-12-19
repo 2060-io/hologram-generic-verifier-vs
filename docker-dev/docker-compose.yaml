@@ -27,6 +27,7 @@ services:
     environment:
       - PUBLIC_API_BASE_URL=http://192.168.149.127:3001
       # - AGENT_PUBLIC_DID=did:web:p2801.ovpndev.2060.io # Enable this line for with public URL
+      - AGENT_ENDPOINT=ws://192.168.149.127:3001 # For deployments, use wss and the assigned public URL
       - AGENT_INVITATION_IMAGE_URL=https://s3.minio.dev.2060.io/public/gov-id-issuer.png
       - AGENT_LABEL=Gov Id Issuer
       - USE_CORS=true
