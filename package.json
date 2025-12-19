@@ -2,10 +2,11 @@
   "name": "hologram-generic-verifier-app",
   "version": "1.2.3",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "ts-node src/server.ts",
+    "dev": "node src/server.ts",
     "build": "next build",
-    "start": "NODE_ENV=production ts-node src/server.ts",
+    "start": "NODE_ENV=production node src/server.ts",
     "check-format": "prettier -c \"src/**/*.{ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "check-types": "eslint \"src/**/*.{ts,tsx}\"",

@@ -1,10 +1,14 @@
 import { createServer } from 'http'
-import { parse } from 'url'
+import { fileURLToPath, parse } from 'url'
 import next from 'next'
 import { Server } from 'socket.io'
+import path from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
+const app = next({ dev, dir: path.resolve(__dirname, '..') })
 const handle = app.getRequestHandler()
 
 function getIssuerInvitationUrl() {

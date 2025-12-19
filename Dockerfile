@@ -1,6 +1,7 @@
 FROM node:22-alpine as deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml .npmrc ./
+RUN corepack enable
 RUN pnpm install --frozen-lockfile
 
 FROM node:22-alpine as builder
@@ -12,6 +13,7 @@ ENV NODE_ENV production
 ENV NEXT_PUBLIC_PORT=APP_NEXT_PUBLIC_PORT
 ENV NEXT_PUBLIC_BASE_URL=APP_NEXT_PUBLIC_BASE_URL
 
+RUN corepack enable
 RUN pnpm build
 
 FROM node:22-bullseye as runner
@@ -23,10 +25,10 @@ RUN apt update && apt install -y imagemagick libopenjp2-7 ghostscript
 
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/server.ts ./server.ts
-COPY --from=builder /app/src/css ./css
-COPY --from=builder /app/src/i18n ./i18n
-COPY --from=builder /app/src/messages ./messages
+COPY --from=builder /app/src/server.ts ./src/server.ts
+COPY --from=builder /app/src/css ./src/css
+COPY --from=builder /app/src/i18n ./src/i18n
+COPY --from=builder /app/src/messages ./src/messages
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
@@ -37,6 +39,7 @@ RUN chmod +x /app/entrypoint.sh
 RUN groupadd -g 1001 nodejs
 RUN useradd -m -u 1001 -g nodejs -s /bin/bash nextjs
 RUN chown -R nextjs:nodejs /app/.next
+RUN corepack enable
 
 USER nextjs
 
