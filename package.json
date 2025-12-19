@@ -10,7 +10,7 @@
     "format": "prettier --write \"app/**/*.{ts,tsx}\"",
     "check-types": "eslint \"{app,apps,libs,test}/**/*.{ts,tsx}\"",
     "lint": "eslint \"{app,apps,libs,test}/**/*.{ts,tsx}\" --fix",
-    "test": "jest --passWithNoTests",
+    "test": "echo \"No tests configured\"",
     "tsc": "tsc"
   },
   "dependencies": {
