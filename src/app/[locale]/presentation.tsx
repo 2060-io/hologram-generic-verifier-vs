@@ -66,7 +66,7 @@ export default function Presentation({ presentationEventMessage }: Props) {
                   size={256}
                   bgColor={'#ffffff'}
                   fgColor={'#000000'}
-                  level={'H'}
+                  level={'L'}
                 />
               </div>
               <button onClick={() => window.location.reload()}>{t('restart')}</button>
