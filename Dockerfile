@@ -23,10 +23,10 @@ RUN apt update && apt install -y imagemagick libopenjp2-7 ghostscript
 
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/server.js ./server.js
-COPY --from=builder /app/css ./css
-COPY --from=builder /app/i18n ./i18n
-COPY --from=builder /app/messages ./messages
+COPY --from=builder /app/server.ts ./server.ts
+COPY --from=builder /app/src/css ./css
+COPY --from=builder /app/src/i18n ./i18n
+COPY --from=builder /app/src/messages ./messages
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json

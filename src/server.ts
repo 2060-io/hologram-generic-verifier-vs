@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const { createServer } = require("http");
-const { parse } = require("url");
-const next = require("next");
-const { Server } = require("socket.io");
+import { createServer } from "http";
+import { parse } from "url";
+import next from "next";
+import { Server } from "socket.io";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -83,7 +83,7 @@ app.prepare().then(async () => {
     : `http://localhost:${PORT}`;
 
   const server = createServer((req, res) => {
-    const parsedUrl = parse(req.url, true);
+    const parsedUrl = parse(req.url ?? '/', true);
     if (parsedUrl.pathname === "/health") {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -155,8 +155,11 @@ app.prepare().then(async () => {
     });
   });
 
-  server.listen(PORT, (err) => {
-    if (err) throw err;
+  server.listen(PORT, () => {
     console.log(`> Ready on ${PUBLIC_BASE_URL}`);
+  });
+  server.on('error', (err) => {
+    console.error('Server error:', err);
+    process.exit(1);
   });
 });

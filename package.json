@@ -3,9 +3,9 @@
   "version": "1.2.3",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "ts-node src/server.ts",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production ts-node src/server.ts",
     "check-format": "prettier -c \"app/**/*.{ts,tsx}\"",
     "format": "prettier --write \"app/**/*.{ts,tsx}\"",
     "check-types": "eslint \"{app,apps,libs,test}/**/*.{ts,tsx}\"",

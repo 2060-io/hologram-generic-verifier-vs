@@ -5,7 +5,7 @@ import {
   OriginalPresentationEventMessage,
   PresentationEventMessage,
   QRRequestState,
-} from '@/src/app/lib/definitions'
+} from '@/app/lib/definitions'
 
 export const useSocket = () => {
   const [isConnected, setIsConnected] = useState(false)

@@ -1,4 +1,4 @@
-import { OriginalClaim, Claim } from '@/src/app/lib/definitions'
+import { OriginalClaim, Claim } from '@/app/lib/definitions'
 import defaultPngBase64 from './defaultPngBase64'
 
 /**
