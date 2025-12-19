@@ -29,9 +29,9 @@ function getIssuerInvitationUrl() {
 app.prepare().then(async () => {
   if (!process.env.VS_AGENT_ADMIN_BASE_URL) {
     console.error(
-      "Missing VS_AGENT_ADMIN_BASE_URL environment variable"
-    );
-    process.exit(1);
+      'Missing VS_AGENT_ADMIN_BASE_URL environment variable'
+    )
+    process.exit(1)
   }
 
   // Now attempt to get the credential definition id, either from the environment variable or the specified
