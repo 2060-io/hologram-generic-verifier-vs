@@ -1,75 +1,71 @@
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
-import { transformClaimsData } from "../utils";
+import { useEffect, useState } from 'react'
+import io from 'socket.io-client'
+import { transformClaimsData } from '../utils'
 import {
   OriginalPresentationEventMessage,
   PresentationEventMessage,
   QRRequestState,
-} from "@/app/lib/definitions";
+} from '@/app/lib/definitions'
 
 export const useSocket = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(false)
   const [requestQRState, setRequestQRState] = useState<QRRequestState>({
     loading: true,
-  });
+  })
 
-  const [presentationEventMessage, setPresentationEventMessage] =
-    useState<PresentationEventMessage>();
+  const [presentationEventMessage, setPresentationEventMessage] = useState<PresentationEventMessage>()
 
   useEffect(() => {
-    const socketIo = io();
+    const socketIo = io()
 
-    socketIo.on("connect", () => {
-      setIsConnected(true);
-      socketIo.emit("generateQR", { socketConnectionId: socketIo.id });
-    });
+    socketIo.on('connect', () => {
+      setIsConnected(true)
+      socketIo.emit('generateQR', { socketConnectionId: socketIo.id })
+    })
 
-    socketIo.on("disconnect", () => {
-      setIsConnected(false);
-    });
+    socketIo.on('disconnect', () => {
+      setIsConnected(false)
+    })
 
-    socketIo.on("generateQREventMessage", (msg) => {
-      console.log("generateQREventMessage", msg);
+    socketIo.on('generateQREventMessage', msg => {
+      console.log('generateQREventMessage', msg)
       if (msg.ok && msg.invitationUrl) {
         setRequestQRState({
           loading: false,
           invitationUrl: msg.invitationUrl,
-        });
+        })
       } else {
         setRequestQRState({
           loading: false,
-          error: msg.error ?? "An error occurred",
-        });
+          error: msg.error ?? 'An error occurred',
+        })
       }
-    });
+    })
 
-    socketIo.on(
-      "presentationEventMessage",
-      async (msg: OriginalPresentationEventMessage) => {
-        console.log("presentationEventMessage has arrived", msg);
-        if (msg.status === "ok" && msg.claims) {
-          const transformedClaims = await transformClaimsData(msg.claims);
-          setPresentationEventMessage({ ...msg, claims: transformedClaims });
-        } else {
-          const { ref, status, proofExchangeId, issuerInvitationUrl } = msg;
-          setPresentationEventMessage({
-            ref,
-            status,
-            proofExchangeId,
-            issuerInvitationUrl,
-          });
-        }
-      },
-    );
+    socketIo.on('presentationEventMessage', async (msg: OriginalPresentationEventMessage) => {
+      console.log('presentationEventMessage has arrived', msg)
+      if (msg.status === 'ok' && msg.claims) {
+        const transformedClaims = await transformClaimsData(msg.claims)
+        setPresentationEventMessage({ ...msg, claims: transformedClaims })
+      } else {
+        const { ref, status, proofExchangeId, issuerInvitationUrl } = msg
+        setPresentationEventMessage({
+          ref,
+          status,
+          proofExchangeId,
+          issuerInvitationUrl,
+        })
+      }
+    })
 
     return () => {
-      socketIo.disconnect();
-    };
-  }, []);
+      socketIo.disconnect()
+    }
+  }, [])
 
   return {
     isConnected,
     presentationEventMessage,
     requestQRState,
-  };
-};
+  }
+}

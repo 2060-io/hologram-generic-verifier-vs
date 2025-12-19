@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl'
 
 export default function Error({ error }: { error: string }) {
-  const t = useTranslations();
+  const t = useTranslations()
   return (
-    <p style={{ color: "rgb(255, 85, 85)" }} className="font-bold text-xl">
-      {`${t("somethingWentWrong")}: ${error}`}
+    <p style={{ color: 'rgb(255, 85, 85)' }} className="font-bold text-xl">
+      {`${t('somethingWentWrong')}: ${error}`}
     </p>
-  );
+  )
 }

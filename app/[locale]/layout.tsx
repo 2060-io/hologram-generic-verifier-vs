@@ -1,31 +1,31 @@
-import { Inter } from "next/font/google";
-import "../../css/globals.css";
-import "../../css/euclidCircularA.css";
-import Header from "./header";
-const inter = Inter({ subsets: ["latin"] });
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import { metadata } from "@/app/lib/metadata";
+import { Inter } from 'next/font/google'
+import '../../css/globals.css'
+import '../../css/euclidCircularA.css'
+import Header from './header'
+const inter = Inter({ subsets: ['latin'] })
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { routing } from '@/i18n/routing'
+import { metadata } from '@/app/lib/metadata'
 
 export default async function RootLayout({
   children,
   params,
 }: Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
 }>) {
-  const { locale } = await params;
+  const { locale } = await params
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as "en" | "es")) {
-    notFound();
+  if (!routing.locales.includes(locale as 'en' | 'es')) {
+    notFound()
   }
 
-  const { title, description } = metadata[locale as "en" | "es"].home;
+  const { title, description } = metadata[locale as 'en' | 'es'].home
   // Providing all messages to the client
   // side is the easiest way to get started
-  const messages = await getMessages();
+  const messages = await getMessages()
   return (
     <html lang={locale} className="bg-white dark:bg-gray-950">
       <head>
@@ -44,5 +44,5 @@ export default async function RootLayout({
         </NextIntlClientProvider>
       </body>
     </html>
-  );
+  )
 }

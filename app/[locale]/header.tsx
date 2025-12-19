@@ -1,26 +1,26 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
 
 export default function Header() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
-    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDarkMode(matchMedia.matches);
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
+    setIsDarkMode(matchMedia.matches)
 
     const handleChange = (e: MediaQueryListEvent) => {
-      setIsDarkMode(e.matches);
-    };
+      setIsDarkMode(e.matches)
+    }
 
-    matchMedia.addEventListener("change", handleChange);
+    matchMedia.addEventListener('change', handleChange)
 
     return () => {
-      matchMedia.removeEventListener("change", handleChange);
-    };
-  }, []);
+      matchMedia.removeEventListener('change', handleChange)
+    }
+  }, [])
 
   return (
     <header className="container mx-auto 2xl:px-28 xl:px-28 lg:px-28 px-6">
@@ -34,18 +34,12 @@ export default function Header() {
             className="flex-1 w-[36px] h-[36px]"
             priority={true}
           />
-          <p className="flex-1 text-hologram-color font-semibold text-2xl pt-1 pl-4">
-            Hologram
-          </p>
+          <p className="flex-1 text-hologram-color font-semibold text-2xl pt-1 pl-4">Hologram</p>
         </div>
         <div>
           <Link href="https://github.com/2060-io" target="_blank">
             <Image
-              src={
-                isDarkMode
-                  ? "/images/logo-github-white.svg"
-                  : "/images/logo-github.svg"
-              }
+              src={isDarkMode ? '/images/logo-github-white.svg' : '/images/logo-github.svg'}
               alt="Logo-gitHub"
               width={36}
               height={36}
@@ -56,5 +50,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

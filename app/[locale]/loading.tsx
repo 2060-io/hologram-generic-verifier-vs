@@ -1,5 +1,5 @@
-"use client";
-import Image from "next/image";
+'use client'
+import Image from 'next/image'
 
 export default function Loading() {
   return (
@@ -19,5 +19,5 @@ export default function Loading() {
         <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mx-auto"></div>
       </div>
     </div>
-  );
+  )
 }
