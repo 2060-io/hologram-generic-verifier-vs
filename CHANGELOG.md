@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.3...v1.3.0) (2025-12-19)
+
+
+### Features
+
+* upgrade package manages from yarn to pnpm ([#84](https://github.com/2060-io/hologram-generic-verifier-vs/issues/84)) ([d6d273b](https://github.com/2060-io/hologram-generic-verifier-vs/commit/d6d273ba7a827caf1c5ac15bf66e3164e41d5ebb))
+
+
+### Bug Fixes
+
+* invitation qr code density ([#88](https://github.com/2060-io/hologram-generic-verifier-vs/issues/88)) ([921e880](https://github.com/2060-io/hologram-generic-verifier-vs/commit/921e880701a12b85f7ad6ea5d4efeb7c0518ca5c))
+
 ## [1.2.3](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.2.2...v1.2.3) (2025-12-19)
 
 
