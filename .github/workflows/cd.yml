@@ -22,6 +22,9 @@ jobs:
       RELEASE_PATCH: ${{ needs.resolve-version.outputs.release-patch }}
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Compute tags
         id: compute-tags
         run: |

@@ -41,7 +41,7 @@ export default function Home() {
           size={256}
           bgColor={'#ffffff'}
           fgColor={'#000000'}
-          level={'H'}
+          level={'L'}
         />
       </div>
     </>
