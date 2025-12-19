@@ -39,7 +39,7 @@ There are also some other optional variables about the Issuer: `ISSUER_DID`, `IS
 ### Prerequisites
 
 * Node.js (v20 or higher)
-* Yarn package manager
+* Pnpm package manager
 * (optional) ImageMagick installed in your system, if your credentials do contain JPEG2000-encoded images. You can do this by following the official [installation guide](https://imagemagick.org/script/download.php).
 * A [VS Agent](https://github.com/2060-io/vs-agent) instance already running and whose admin API is accessibe by your app
 
@@ -48,13 +48,13 @@ There are also some other optional variables about the Issuer: `ISSUER_DID`, `IS
 2. **Install dependencies:**
 
    ```bash
-   yarn install
+   pnpm install
    ```
 
 3. **Start the development server:**
 
    ```bash
-   yarn dev
+   pnpm dev
    ```
 
    Or:
@@ -62,7 +62,7 @@ There are also some other optional variables about the Issuer: `ISSUER_DID`, `IS
    **Run in Production mode:**
 
    ```bash
-   yarn build && yarn start
+   pnpm build && pnpm start
    ```
 
 > *NOTE*: You need to define all required environment variables to run it properly
