@@ -25,7 +25,7 @@ services:
     build: 
       context: ../
       dockerfile: Dockerfile
-    command: yarn start
+    command: pnpm start
     environment:
       - NEXT_PUBLIC_PORT=3000
       - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904

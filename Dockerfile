@@ -1,7 +1,7 @@
 FROM node:22-alpine as deps
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json pnpm-lock.yaml .npmrc ./
+RUN pnpm install --frozen-lockfile
 
 FROM node:22-alpine as builder
 WORKDIR /app
@@ -12,7 +12,7 @@ ENV NODE_ENV production
 ENV NEXT_PUBLIC_PORT=APP_NEXT_PUBLIC_PORT
 ENV NEXT_PUBLIC_BASE_URL=APP_NEXT_PUBLIC_BASE_URL
 
-RUN yarn build
+RUN pnpm build
 
 FROM node:22-bullseye as runner
 WORKDIR /app
@@ -42,4 +42,4 @@ USER nextjs
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 
-CMD ["yarn", "start"]
+CMD ["pnpm", "start"]
