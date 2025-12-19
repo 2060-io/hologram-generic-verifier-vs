@@ -1,5 +1,5 @@
 'use client'
-import { useSocket } from '@/app//hook/useSocket'
+import { useSocket } from '@/app/hook/useSocket'
 import { QRCodeSVG } from 'qrcode.react'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
