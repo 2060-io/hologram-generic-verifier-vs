@@ -8,7 +8,7 @@ containerPort: 2904
 replicas: 1
 
 image:
-  repository: vio2060/hologram-generic-verifier-app
+  repository: io2060/hologram-generic-verifier-app
   # Tag defaults to Chart.Version if not specified
   tag: ""
 
