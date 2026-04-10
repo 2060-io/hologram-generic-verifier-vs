@@ -34,43 +34,39 @@ app.prepare().then(async () => {
     process.exit(1)
   }
 
-  // Now attempt to get the credential definition id, either from the environment variable or the specified
-  // issuer (provided it does have a VS Agent accessible by us)
-  let credentialDefinitionId = process.env.CREDENTIAL_DEFINITION_ID
+  let credentialDefinitionId: string | undefined
+  let jsonSchemaCredentialId: string | undefined
 
-  if (!credentialDefinitionId) {
-    const issuerVsAgentAdminBaseUrl = process.env.ISSUER_VS_AGENT_ADMIN_BASE_URL
-
-    if (!issuerVsAgentAdminBaseUrl) {
-      console.error(
-        'You must define a CREDENTIAL_DEFINITION_ID, or ISSUER_VS_AGENT_ADMIN_BASE_URL to get the credential definition to request',
-      )
-      process.exit(1)
-    }
-
-    const url = `${issuerVsAgentAdminBaseUrl}/v1/credential-types`
+  if (process.env.JSON_SCHEMA_CREDENTIAL_ID) {
+    jsonSchemaCredentialId = process.env.JSON_SCHEMA_CREDENTIAL_ID
+    console.log(`JSON Schema Credential ID: ${jsonSchemaCredentialId}`)
+  } else if (process.env.ISSUER_DID?.startsWith('did:webvh:')) {
+    const parts = process.env.ISSUER_DID.split(':')
+    const domain = parts.slice(3).join('/')
+    const resourcesUrl = `https://${domain}/resources/?resourceType=anonCredsCredDef`
     try {
-      const response = await fetch(url, {
-        headers: {
-          accept: 'application/json',
-        },
+      const response = await fetch(resourcesUrl, {
+        headers: { accept: 'application/json' },
         method: 'GET',
       })
       const result = await response.json()
-
       const firstCredDefId = result[0]?.id
       if (!firstCredDefId) {
-        console.error('VS Agent response does not contain any valid credential type')
+        console.error('Issuer DID resources do not contain any anonCredsCredDef resource')
         process.exit(1)
       }
       credentialDefinitionId = firstCredDefId
+      console.log(`Credential Definition ID (from issuer DID): ${credentialDefinitionId}`)
     } catch (error) {
-      console.error('Error fetching credential types:', error)
+      console.error('Error fetching anonCredsCredDef resources from issuer DID:', error)
       process.exit(1)
     }
+  } else {
+    console.error(
+      'You must define JSON_SCHEMA_CREDENTIAL_ID or ISSUER_DID (did:webvh) to determine the credential to request',
+    )
+    process.exit(1)
   }
-
-  console.log(`Credential Definition ID: ${credentialDefinitionId}`)
 
   const PORT = process.env.NEXT_PUBLIC_PORT ? Number(process.env.NEXT_PUBLIC_PORT) : 3000
 
@@ -101,9 +97,7 @@ app.prepare().then(async () => {
           callbackUrl: `${PUBLIC_BASE_URL}/api/presentation`,
           ref: data.socketConnectionId,
           requestedCredentials: [
-            {
-              credentialDefinitionId,
-            },
+            jsonSchemaCredentialId ? { jsonSchemaCredentialId } : { credentialDefinitionId },
           ],
         }
         const response = await fetch(url, {

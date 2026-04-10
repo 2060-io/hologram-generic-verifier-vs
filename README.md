@@ -19,18 +19,19 @@ All settings are configured by environment variables.
 
 | Variable                     | Description                                                                                                         | Default value         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| NEXT_PUBLIC_BASE_URL         | Public URL (without port) where the app is deployed                                                                       | http://localhost:3000 |
+| NEXT_PUBLIC_BASE_URL         | Public URL (without port) where the app is deployed                                                                 | http://localhost:3000 |
 | NEXT_PUBLIC_PORT             | Port where app is listening                                                                                         | 3000                  |
-| CREDENTIAL_DEFINITION_ID     | AnonCreds credential definition ID of the credential to request       | `none`                |
-| VS_AGENT_ADMIN_BASE_URL | VS Agent Admin API URL (accessible by the app)                                                                                              | `none`                |
-| ISSUER_DID                   | Optional public DID to let users connect to get their credentials in case they don't have any compatible credential | `none`                |
-| ISSUER_LABEL                 | Optional label to show in the invitation to credential issuer                                                              | Issuer                |
-| ISSUER_IMAGE_URL             | Optional URL pointing to an image to show in the invitation to credential issuer                                          | `none`                |
-| ISSUER_VS_AGENT_ADMIN_BASE_URL          | Optional Issuer VS Agent Admin URL: in case no Credential Definition is specified, the Verifier will attempt to get the first credential type from this URL and will use its Credential Definition ID for its requests. Make sure that Generic Verifier has access to it. | `none`                |
+| VS_AGENT_ADMIN_BASE_URL      | VS Agent Admin API URL (accessible by the app)                                                                      | `none`                |
+| JSON_SCHEMA_CREDENTIAL_ID    | JSON Schema Credential ID of the credential to request (e.g. `https://dm.gov-id-tr.demos.dev.2060.io/vt/schemas-gov-id-jsc.json`) | `none`  |
+| ISSUER_DID                   | Issuer DID (`did:webvh`): if `JSON_SCHEMA_CREDENTIAL_ID` is not set, the verifier auto-discovers the credential definition from the issuer's DID-linked resources. Also used to redirect users without a compatible credential. | `none` |
+| ISSUER_LABEL                 | Optional label to show in the invitation to credential issuer                                                       | Issuer                |
+| ISSUER_IMAGE_URL             | Optional URL pointing to an image to show in the invitation to credential issuer                                    | `none`                |
+
+> **Note:** `CREDENTIAL_DEFINITION_ID` and `ISSUER_VS_AGENT_ADMIN_BASE_URL` were supported until v1.3.1 as part of 2060 demo deployments and are no longer supported.
 
 ### Overview
 
-The minimal setup for Generic Verifier app requires to define a `VS_AGENT_ADMIN_BASE_URL` where its VS Agent is located, and either `CREDENTIAL_DEFINITION_ID` or `ISSUER_VS_AGENT_ADMIN_BASE_URL`. If you know beforehand the ID of the credential type you want the verifier to ask for presentation, you can just define the first. Otherwise, specify the Issuer VS Agent Admin URL location, so the verifier will dynamically use the first available credential type. This is useful to speed-up demo deployment in cases where credential definition IDs are not deterministic, such as did:web AnonCreds.
+The minimal setup for Generic Verifier requires `VS_AGENT_ADMIN_BASE_URL` and either `JSON_SCHEMA_CREDENTIAL_ID` or `ISSUER_DID` (pointing to a `did:webvh` identifier). If `JSON_SCHEMA_CREDENTIAL_ID` is set, it is sent directly in the proof request. Otherwise, the verifier auto-discovers the credential definition by querying the issuer's DID-linked resources of type `anonCredsCredDef`.
 
 There are also some other optional variables about the Issuer: `ISSUER_DID`, `ISSUER_LABEL` and `ISSUER_IMAGE_URL`. They are defined to allow the creation of an implicit DIDComm out of band invitation to the issuer service, to redirect the user when they don't have the requested credential in their wallet. If you don't specify them it is fine: Generic Verifier will simply show a "no compatible credentials" error in the web frontend.
 
@@ -79,7 +80,7 @@ Once running, you can test your Verifiable Service by following
    First, make sure you have [Hologram Messaging](https://hologram.zone) installed on your mobile device. You can download it from the Google Play Store, Apple App Store, or Huawei App Gallery.
 
 2. **Obtain a Credential from the issuer Verifiable Service**  
-   Your Hologram app's wallet needs to hold a Verifiable Credential that corresponds to `CREDENTIAL_DEFINITION_ID`. If not, make a connection to the issuer service and obtain one.
+   Your Hologram app's wallet needs to hold a Verifiable Credential that matches the configured `JSON_SCHEMA_CREDENTIAL_ID` (or the credential definition auto-discovered from `ISSUER_DID`). If not, make a connection to the issuer service and obtain one.
 
 3. **Scan the QR Code and Present Your Credential**  
    Open your web browser into this web app's URL and, in your mobile device, scan the QR code with Hologram: it will prompt you to present the required credential. After presenting it, you should see a confirmation screen similar to the one shown below.
