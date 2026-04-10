@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.3.1...v1.4.0) (2026-04-10)
+
+
+### Features
+
+* support JSON_SCHEMA_CREDENTIAL_ID for proof requests ([#95](https://github.com/2060-io/hologram-generic-verifier-vs/issues/95)) ([6c765ba](https://github.com/2060-io/hologram-generic-verifier-vs/commit/6c765ba7e41cefcba776e93adf0e7e865848a1f6))
+
 ## [1.3.1](https://github.com/2060-io/hologram-generic-verifier-vs/compare/v1.3.0...v1.3.1) (2026-02-20)
 
 
