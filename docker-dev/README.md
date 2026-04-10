@@ -30,7 +30,7 @@ services:
       - NEXT_PUBLIC_PORT=3000
       - NEXT_PUBLIC_BASE_URL=http://192.168.149.127:2904
       - VS_AGENT_ADMIN_BASE_URL=http://vs-agent:3000
-      - CREDENTIAL_DEFINITION_ID=did:web:unic-id-issuer.demos.dev.2060.io?service=anoncreds&relativeRef=/credDef/9rJib8YFi1JdxhdUmjMKEiYj49CNdMa9cEn42z4nouYS
+      - JSON_SCHEMA_CREDENTIAL_ID=https://dm.gov-id-tr.demos.dev.2060.io/vt/schemas-gov-id-jsc.json
     networks:
       - verifier
 

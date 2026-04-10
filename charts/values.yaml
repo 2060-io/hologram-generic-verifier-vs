@@ -21,10 +21,9 @@ service:
   issuerDid: did:web:issuer.{{ .Values.global.domain }}
   issuerLabel: test-issuer
   issuerImageUrl: https://i.unic-id-issuer.{{ .Values.global.domain }}/avatar.png
-  # Use only if you want to use the vs-agent with a credential definition Id
-  # If you use both credentialDefinitionId and issuerVsAgentAdminBaseUrl, the issuerVsAgentAdminBaseUrl will be ignored
-  credentialDefinitionId: credential-definition-id
-  # issuerVsAgentAdminBaseUrl: http://issuer:3000
+  # JSON Schema Credential ID for proof requests (e.g. https://dm.gov-id-tr.demos.dev.2060.io/vt/schemas-gov-id-jsc.json)
+  # If not set, ISSUER_DID (did:webvh) will be used to auto-discover the credential definition.
+  jsonSchemaCredentialId: ""
 
 # If you want to use the vs-agent-chart, you can enable it by setting the following:
 # vs-agent-chart.enabled: true

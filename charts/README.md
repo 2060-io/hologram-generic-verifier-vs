@@ -27,18 +27,19 @@ The `vs-agent` chart can be found here: [vs-agent GitHub Repository](https://git
    - `name`: Set the name of the deployment.
    - `namespace`: Specify the Kubernetes namespace where the chart will be deployed.
    - `domain`: Set the domain for the application.
-   - `extraEnv`: Uncomment and configure the `CREDENTIAL_DEFINITION_ID` variable if needed.
+   - `service.jsonSchemaCredentialId`: Set the JSON Schema Credential ID to request, or leave empty to use `ISSUER_DID` auto-discovery.
    - `vs-agent-chart.enabled`: Set to `true` if you want to enable the `vs-agent` dependency.
 3. If using the `vs-agent` dependency, ensure the `vs-agent` chart is properly configured and deployed.
+
+> **Note:** `CREDENTIAL_DEFINITION_ID` and `ISSUER_VS_AGENT_ADMIN_BASE_URL` were supported until v1.3.1 as part of 2060 demo deployments and are no longer supported. Use `JSON_SCHEMA_CREDENTIAL_ID` or `ISSUER_DID` (did:webvh) instead.
 
 ### Example `values.yaml`
 ```yaml
 name: hologram-generic-verifier-vs
 namespace: default
 domain: example.io
-extraEnv:
-  - name: CREDENTIAL_DEFINITION_ID
-    value: "my-credential-definition-id"
+service:
+  jsonSchemaCredentialId: "https://dm.gov-id-tr.demos.dev.2060.io/vt/schemas-gov-id-jsc.json"
 vs-agent-chart:
   enabled: true
   replicas: 1
